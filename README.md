@@ -5,7 +5,7 @@
 Projeto da unidade curricular de Administração de Sistemas em Rede:
 * Ficheiros de simulação do Cisco Packet Tracer das redes de cada edifício;
 * PDF com a vista sumária dos três edifícios e pisos e das redes utilizadas em cada um (TO-DO);
-* Plantas dos edifícios (TO-DO).
+* Plantas dos edifícios.
 
 Realizado por:
 * Jorge Pissarra, A39489
@@ -13,43 +13,100 @@ Realizado por:
 
 ---
 
-## Configurações de Redes
-
-Uma rede interna (funcionários e afins)
-
-Uma rede para convidados
-
-Uma rede para IoT
-
----
-
 ## Configurações dos Equipamentos
 
-### Edifício 1 - Oriente
+### Edifício 1 - XPTOtec_Oriente
 
 #### Piso 0
 
 ##### Configuração do *Router*
 
-##### Configuração da *Firewall*
+**`Router-PT`**: `Main Router`
++ `Fast Ethernet 0/0`: ligação ao `Main Switch`
+  + IPv4 Address: `192.168.0.1`
+  + Subnet Mask: `255.255.255.0`
 
-##### Configuração do *Switch*
+##### Configuração dos *Switches*
+
+**`2960-24TT`**: `Main Switch`
++ `Gigabit Ethernet 0/1`: ligação ao `Main Router`
++ `Gigabit Ethernet 0/2`: ligação ao `Peer 0`
++ `Fast Ethernet 0/1`: ligação ao `Server Switch`
++ `Fast Ethernet 0/2`: ligação ao `First floor Switch`
+
+**`2960-24TT`**: `Server Switch`
++ `Gigabit Ethernet 0/1`: ligação ao `Server Switch`
++ `Fast Ethernet 0/1`: ligação ao `DHCP`
++ `Fast Ethernet 0/2`: ligação ao `HTTP`
++ `Fast Ethernet 0/3`: ligação ao `TFTP`
++ `Fast Ethernet 0/4`: ligação ao `Email`
++ `Fast Ethernet 0/5`: ligação ao `DNS`
++ `Fast Ethernet 0/6`: ligação ao `IoT Registrar`
 
 ##### Configuração dos Servidores
 
-###### Servidor de E-Mail
+###### Servidor DHCP
 
-###### Servidor HTTP
+**`Server-PT`**: `DHCP` - servidor de DHCP (*Dynamic Host Configuration Protocol*)
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `192.168.0.2`
+  + Subnet Mask: `255.255.255.0`
+  + Default Gateway: `192.168.0.1`
+  + DNS Server:`8.8.8.8`
 
 ###### Servidor DNS
 
-###### Servidores DHCP
+**`Server-PT`**: `DNS` - servidor de DNS (*Domain Name Service*)
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `192.168.0.3`
+  + Subnet Mask: `255.255.255.0`
+  + Default Gateway: `192.168.0.1`
+  + DNS Server:`8.8.8.8`
+
+###### Servidor de Email
+
+**`Server-PT`**: `Email` - servidor de e-mail
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `192.168.0.4`
+  + Subnet Mask: `255.255.255.0`
+  + Default Gateway: `192.168.0.1`
+  + DNS Server:`8.8.8.8`
 
 ###### Servidor TFTP
 
+**`Server-PT`**: `TFTP` - servidor de TFTP (*Trivial File Transfer Protocol*)
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `192.168.0.5`
+  + Subnet Mask: `255.255.255.0`
+  + Default Gateway: `192.168.0.1`
+  + DNS Server:`8.8.8.8`
+
+###### Servidor HTTP
+
+**`Server-PT`**: `HTTP` - servidor de HTTP (*HyperText Transfer Protocol*)
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `192.168.0.6`
+  + Subnet Mask: `255.255.255.0`
+  + Default Gateway: `192.168.0.1`
+  + DNS Server:`8.8.8.8`
+
 ###### Servidor de Registo IoT
 
+**`Server-PT`** - servidor de Registo IoT (*Internet of Things*)
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `192.168.0.7`
+  + Subnet Mask: `255.255.255.0`
+  + Default Gateway: `192.168.0.1`
+  + DNS Server:`8.8.8.8`
+
 ##### Configuração do Computador do Administrador de Sistemas
+
+**`PC-PT`**: `OrienteAdmin` - computador do administrador de sistemas
++ `Fast Ethernet 0/0`: ligação ao `First floor Switch`
+  + IPv4 Address: `192.168.0.6`
+  + Subnet Mask: `255.255.255.0`
+  + Default Gateway: `192.168.0.1`
+  + DNS Server:`8.8.8.8`
 
 ##### Configuração da IoT
 
@@ -69,7 +126,9 @@ Uma rede para IoT
 
 ##### Configuração do *Switch*
 
-##### Configuração do Computador do Administrador de Sistemas
+**`2960-24TT`**: `First floor Switch`
++ `Gigabit Ethernet 0/1`: ligação ao `Main Switch`
++ `Fast Ethernet 0/1`: ligação ao `OrienteAdmin`
 
 ##### Configuração do Computador-exemplo
 
@@ -81,23 +140,163 @@ Uma rede para IoT
 
 ##### Configuração do *Switch*
 
-##### Configuração do Computador do Administrador de Sistemas
-
 ##### Configuração do Computador-exemplo
 
 
 
-### Edifício 2 - Nascente
+### Edifício 2 - XPTOtec_Nascente
 
 #### Piso 0
 
 ##### Configuração do *Router*
 
-##### Configuração da *Firewall*
+**`Router-PT`**: `Main Router`
++ `Fast Ethernet 0/0`: ligação ao `Main Switch`
+  + IPv4 Address: `172.16.0.1`
+  + Subnet Mask: `255.255.0.0`
+
+##### Configuração dos *Switches*
+
+**`2960-24TT`**: `Main Switch`
++ `Gigabit Ethernet 0/1`: ligação ao `Main Router`
++ `Gigabit Ethernet 0/2`: ligação à rede *multiuser*
+
+**`2960-24TT`**: `Server Switch`
++ `Fast Ethernet 0/0`: 
+
+##### Configuração dos Servidores
+
+###### Servidor DHCP
+
+**`Server-PT`**: `DHCP` - servidor de DHCP (*Dynamic Host Configuration Protocol*)
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `172.16.0.2`
+  + Subnet Mask: `255.255.0.0`
+  + Default Gateway: `172.16.0.1`
+  + DNS Server:`8.8.8.8`
+
+###### Servidor de Email
+
+**`Server-PT`**: `Email` - servidor de e-mail
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `172.16.0.3`
+  + Subnet Mask: `255.255.0.0`
+  + Default Gateway: `172.16.0.1`
+  + DNS Server:`8.8.8.8`
+
+###### Servidor FTP
+
+**`Server-PT`**: `FTP` - servidor de FTP (*File Transfer Protocol*)
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `172.16.0.4`
+  + Subnet Mask: `255.255.0.0`
+  + Default Gateway: `172.16.0.1`
+  + DNS Server:`8.8.8.8`
+
+###### Servidor HTTP
+
+**`Server-PT`**: `HTTP` - servidor de HTTP (*HyperText Transfer Protocol*)
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `172.16.0.5`
+  + Subnet Mask: `255.255.0.0`
+  + Default Gateway: `172.16.0.1`
+  + DNS Server:`8.8.8.8`
+
+###### Servidor de Registo IoT
+
+**`Server-PT`** - servidor de Registo IoT (*Internet of Things*)
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `172.16.0.6`
+  + Subnet Mask: `255.255.0.0`
+  + Default Gateway: `172.16.0.1`
+  + DNS Server:`8.8.8.8`
+
+##### Configuração do Computador do Administrador de Sistemas
+
+##### Configuração do Computador-exemplo
+
+#### Piso 1
 
 ##### Configuração do *Switch*
 
+##### Configuração do Computador-exemplo
+
+#### Piso 2
+
+##### Configuração do *Switch*
+
+##### Configuração do Computador-exemplo
+
+
+
+### Edifício 3 - XPTOtec_Leste
+
+#### Piso 0
+
+#### Piso 1
+
+##### Configuração do *Router*
+
+**`Router-PT`**: `Main Router`
++ `Fast Ethernet 0/0`: ligação ao `Main Switch`
+  + IPv4 Address: `10.0.0.1`
+  + Subnet Mask: `255.0.0.0`
+
+##### Configuração dos *Switches*
+
+**`2960-24TT`**: `Main Switch`
++ `Gigabit Ethernet 0/1`: ligação ao `Main Router`
++ `Gigabit Ethernet 0/2`: ligação à rede *multiuser*
+
+**`2960-24TT`**: `Server Switch`
++ `Fast Ethernet 0/0`: 
+
 ##### Configuração dos Servidores
+
+###### Servidor DHCP
+
+**`Server-PT`**: `DHCP` - servidor de DHCP (*Dynamic Host Configuration Protocol*)
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `10.0.0.2`
+  + Subnet Mask: `255.0.0.0`
+  + Default Gateway: `10.0.0.1`
+  + DNS Server:`8.8.8.8`
+
+###### Servidor de Email
+
+**`Server-PT`**: `Email` - servidor de e-mail
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `10.0.0.3`
+  + Subnet Mask: `255.0.0.0`
+  + Default Gateway: `10.0.0.1`
+  + DNS Server:`8.8.8.8`
+
+###### Servidor FTP
+
+**`Server-PT`**: `FTP` - servidor de FTP (*File Transfer Protocol*)
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `10.0.0.4`
+  + Subnet Mask: `255.0.0.0`
+  + Default Gateway: `10.0.0.1`
+  + DNS Server:`8.8.8.8`
+
+###### Servidor HTTP
+
+**`Server-PT`**: `HTTP` - servidor de HTTP (*HyperText Transfer Protocol*)
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `10.0.0.5`
+  + Subnet Mask: `255.0.0.0`
+  + Default Gateway: `10.0.0.1`
+  + DNS Server:`8.8.8.8`
+
+###### Servidor de Registo IoT
+
+**`Server-PT`** - servidor de Registo IoT (*Internet of Things*)
++ `Fast Ethernet 0/0`: ligação ao `Server Switch`
+  + IPv4 Address: `10.0.0.6`
+  + Subnet Mask: `255.0.0.0`
+  + Default Gateway: `10.0.0.1`
+  + DNS Server:`8.8.8.8`
 
 ###### Servidor de E-Mail
 
@@ -113,57 +312,9 @@ Uma rede para IoT
 
 ##### Configuração do Computador-exemplo
 
-#### Piso 1
-
-##### Configuração do *Switch*
-
-##### Configuração do Computador do Administrador de Sistemas
-
-##### Configuração do Computador-exemplo
-
 #### Piso 2
 
 ##### Configuração do *Switch*
-
-##### Configuração do Computador do Administrador de Sistemas
-
-##### Configuração do Computador-exemplo
-
-
-
-### Edifício 3 - Leste
-
-#### Piso 0
-
-#### Piso 1
-
-##### Configuração do *Router*
-
-##### Configuração da *Firewall*
-
-##### Configuração do *Switch*
-
-##### Configuração dos Servidores
-
-###### Servidor de E-Mail
-
-###### Servidor HTTP
-
-###### Servidores DHCP
-
-###### Servidor TFTP
-
-###### Servidor de Registo IoT
-
-##### Configuração do Computador do Administrador de Sistemas
-
-##### Configuração do Computador-exemplo
-
-#### Piso 2
-
-##### Configuração do *Switch*
-
-##### Configuração do Computador do Administrador de Sistemas
 
 ##### Configuração do Computador-exemplo
 
@@ -174,6 +325,9 @@ Uma rede para IoT
 ACLs.
 
 <!--
+
+ALERTA:
+Como o 8.8.8.8 é o DNS da Google, numa situação real este endereço não é recomendado e teria de ser um endereço diferente.
 
 ## Configuração do Equipamento
 
@@ -216,10 +370,10 @@ Lado interno da empresa:
   + DNS Server:`192.168.8.8`
 + **`Switch0`** - *Switch* ligado ao `Router`.
 + Configuração do **`Router Principal`**:
-  + `Interface 0/0/0`:
+  + `Ethernet 0/0/0`:
     + IPv4 Address: `192.168.8.1`
     + Subnet Mask: `255.0.0.0`
-  + `Interface 0/0/1`:
+  + `Ethernet 0/0/1`:
     + IPv4 Address: `100.100.200.1`
     + Subnet Mask: `255.255.255.0`
 
@@ -237,10 +391,10 @@ Segundo Espaço da Empresa:
   + DNS Server:`192.168.8.8`
 + **`Switch0`** - *Switch* ligado ao `Router`.
 + Configuração do **`Router Secundario`**:
-  + `Interface 0/0/0`:
+  + `Ethernet 0/0/0`:
     + IPv4 Address: `80.80.80.1`
     + Subnet Mask: `255.0.0.0`
-  + `Interface 0/0/1`:
+  + `Ethernet 0/0/1`:
     + IPv4 Address: `192.168.6.1`
     + Subnet Mask: `255.255.255.0`
 
@@ -268,10 +422,10 @@ Lado externo da empresa:
   + DNS Server: `8.8.8.8`
 + **`Switch1`** - *Switch* ligado ao `Router Externo`.
 + Configuração do **`Router Externo`**:
-  + `Interface 0/0/0`:
+  + `Ethernet 0/0/0`:
     + IPv4 Address: `192.168.8.1`
     + Subnet Mask: `255.0.0.0`
-  + `Interface 0/0/1`:
+  + `Ethernet 0/0/1`:
     + IPv4 Address: `100.100.200.1`
     + Subnet Mask: `255.255.255.0`
 
@@ -357,8 +511,8 @@ Passos para que o website empresa esteja disponível dentro da empresa:
 6. Adicionar uma excepção para permitir acesso DNS: **permit udp any any eq domain**;
 7. Adicionar uma excepção para permitir acesso através da VPN: **permit udp any any eq isakmp**;
 8. Sair com **exit**;
-9. Conectar à interface desejada com: **interface GigabitEthernet 0/0/1**; 
-10. Activar a firewall para esta interface para pacotes de entrada: **ip access-group Firewall in**.
+9. Conectar à Ethernet desejada com: **Ethernet GigabitEthernet 0/0/1**; 
+10. Activar a firewall para esta Ethernet para pacotes de entrada: **ip access-group Firewall in**.
 
 ### Versão 2
 
@@ -366,7 +520,7 @@ Passos para que o website empresa esteja disponível dentro da empresa:
 2. Utilizar o comando **`enable`**;
 3. Utilizar o comando **`write erase`** para apagar as configurações;
 4. Utilizar o comando **`reload`** para introduzir definições de fábrica;
-5. Reconfigurar as interfaces de acordo com a configuração base do equipamento, a VPN e o NAT;
+5. Reconfigurar as Ethernets de acordo com a configuração base do equipamento, a VPN e o NAT;
 6. 
 
 ## 5) Configuração do Servidor NTP
@@ -438,9 +592,9 @@ No servidor NAS existe um programa em Python que segue a seguinte lógica:
 3. Escrever **`enable`**;
 4. Escrever **`configure terminal`**;
 5. Escrever **`ip nat inside source static 192.168.8.1 192.168.1.1`**;
-6. Abrir a interface **`Gigabit0/0/0`**:
+6. Abrir a Ethernet **`Gigabit0/0/0`**:
   + Escrever **`ip nat inside`**;
-7. Abrir a interface **`Gigabit0/0/1`**;
+7. Abrir a Ethernet **`Gigabit0/0/1`**;
   + Escrever **`ip nat outside`**.
 
 ## 9) Configuração de um tunel VPN
@@ -485,10 +639,10 @@ No servidor NAS existe um programa em Python que segue a seguinte lógica:
     4. Escrever **`set transform-set MainRouter-SecundaryRouter`**;
     5. Escrever **`match address 100`**;
 26. Voltar ao **`Router Principal`**;
-    1.  Aceder à Interface Externa;
+    1.  Aceder à Ethernet Externa;
     2.  Escrever **`crypto map IPSEC-CRYPTOMAP`**;
 27. Voltar ao **`Router Secundario`**;
-    1.  Aceder à Interface Externa;
+    1.  Aceder à Ethernet Externa;
     2.  Escrever **`crypto map IPSEC-CRYPTOMAP`**;
 28. Testar em um dos routers com o comando **`show crypto ipsec sa`**.
 
