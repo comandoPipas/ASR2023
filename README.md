@@ -3,13 +3,13 @@
 ## Informações
 
 Projeto da unidade curricular de Administração de Sistemas em Rede:
-* Ficheiros de simulação do Cisco Packet Tracer das redes de cada edifício;
-* PDF com a vista sumária dos três edifícios e pisos e das redes utilizadas em cada um (TO-DO);
-* Plantas dos edifícios.
++ Ficheiros de simulação do Cisco Packet Tracer das redes de cada edifício;
++ PDF com a vista sumária dos três edifícios e pisos e das redes utilizadas em cada um (TO-DO);
++ Plantas dos edifícios.
 
 Realizado por:
-* Jorge Pissarra, A39489
-* Sara Martins, A44488-E10973
++ Jorge Pissarra, A39489
++ Sara Martins, A44488-E10973
 
 ---
 
