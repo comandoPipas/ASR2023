@@ -25,23 +25,56 @@ Realizado por:
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
   + IPv4 Address: `192.168.0.1`
   + Subnet Mask: `255.255.255.0`
++ `Gigabit Ethernet 6/0`: ligação ao `Nascente` (*multiuser*)
++ `Gigabit Ethernet 7/0`: ligação ao `Leste` (*multiuser*)
+
+**`Router-PT`**: `Groundfloor Router`
++ `Fast Ethernet 0/0`: ligação ao `Main Switch`
+  + IPv4 Address: `x.x.x.x`
+  + Subnet Mask: `x.x.x.x`
++ `Fast Ethernet 1/0`: ligação ao `Server Switch`
+  + IPv4 Address: `192.168.1.97 /27`
+  + Subnet Mask: `255.255.255.224`
+
+**`Router-PT`**: `IoT Router`
++ `Fast Ethernet 0/0`: ligação a
+  + IPv4 Address: `x.x.x.x`
+  + Subnet Mask: `x.x.x.x`
++ `Fast Ethernet 0/1`: ligação a
+  + IPv4 Address: `x.x.x.x`
+  + Subnet Mask: `x.x.x.x`
+
+**`Router-PT`**: `PC Network Router`
++ `Fast Ethernet 0/0`: ligação ao `Main Switch`
++ `Fast Ethernet 1/0`: ligação ao `First Floor Switch`
++ `Fast Ethernet 6/0`: ligação ao `Second Floor Switch`
 
 ##### Configuração dos *Switches*
 
 **`2960-24TT`**: `Main Switch`
 + `Gigabit Ethernet 0/1`: ligação ao `Main Router`
-+ `Gigabit Ethernet 0/2`: ligação ao `Peer 0`
-+ `Fast Ethernet 0/1`: ligação ao `Server Switch`
-+ `Fast Ethernet 0/2`: ligação ao `First floor Switch`
++ `Gigabit Ethernet 0/2`: ligação ao `Groundfloor Router`
++ `Fast Ethernet 0/2`: ligação ao `First Floor Switch`
++ `Fast Ethernet 0/3`: ligação ao `Second Floor Switch`
 
 **`2960-24TT`**: `Server Switch`
-+ `Gigabit Ethernet 0/1`: ligação ao `Server Switch`
++ `Gigabit Ethernet 0/1`: ligação ao `Groundfloor Router`
 + `Fast Ethernet 0/1`: ligação ao `DHCP`
-+ `Fast Ethernet 0/2`: ligação ao `HTTP`
-+ `Fast Ethernet 0/3`: ligação ao `TFTP`
-+ `Fast Ethernet 0/4`: ligação ao `Email`
-+ `Fast Ethernet 0/5`: ligação ao `DNS`
-+ `Fast Ethernet 0/6`: ligação ao `IoT Registrar`
++ `Fast Ethernet 0/2`: ligação ao `DNS`
++ `Fast Ethernet 0/3`: ligação ao `Email`
++ `Fast Ethernet 0/4`: ligação ao `TFTP`
++ `Fast Ethernet 0/5`: ligação ao `HTTP`
++ `Fast Ethernet 0/6`: ligação ao `IoT Register`
+
+**`2960-24TT`**: `IoT Switch`
++ `Gigabit Ethernet 0/1`: ligação ao `IoT Router`
++ `Fast Ethernet 0/1`: ligação a 
+
+**`2960-24TT`**: `First Floor Switch`
++ `Gigabit Ethernet 0/1`: ligação ao `PC Network Router`
+
+**`2960-24TT`**: `Second Floor Switch`
++ `Gigabit Ethernet 0/1`: ligação ao `PC Network Router`
 
 ##### Configuração dos Servidores
 
@@ -49,64 +82,73 @@ Realizado por:
 
 **`Server-PT`**: `DHCP` - servidor de DHCP (*Dynamic Host Configuration Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.0.2`
-  + Subnet Mask: `255.255.255.0`
-  + Default Gateway: `192.168.0.1`
-  + DNS Server:`8.8.8.8`
+  + IPv4 Address: `192.168.1.98 /27`
+  + Subnet Mask: `255.255.255.224`
+  + Default Gateway: `192.168.1.97`
+  + DNS Server: `192.168.1.99`
 
 ###### Servidor DNS
 
 **`Server-PT`**: `DNS` - servidor de DNS (*Domain Name Service*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.0.3`
-  + Subnet Mask: `255.255.255.0`
-  + Default Gateway: `192.168.0.1`
-  + DNS Server:`8.8.8.8`
+  + IPv4 Address: `192.168.1.99 /27`
+  + Subnet Mask: `255.255.255.224`
+  + Default Gateway: `192.168.1.97`
+  + DNS Server: `192.168.1.99`
 
 ###### Servidor de Email
 
 **`Server-PT`**: `Email` - servidor de e-mail
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.0.4`
-  + Subnet Mask: `255.255.255.0`
-  + Default Gateway: `192.168.0.1`
-  + DNS Server:`8.8.8.8`
+  + IPv4 Address: `192.168.1.100`
+  + Subnet Mask: `255.255.255.224`
+  + Default Gateway: `192.168.1.97`
+  + DNS Server: `192.168.1.99`
 
 ###### Servidor TFTP
 
 **`Server-PT`**: `TFTP` - servidor de TFTP (*Trivial File Transfer Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.0.5`
-  + Subnet Mask: `255.255.255.0`
-  + Default Gateway: `192.168.0.1`
-  + DNS Server:`8.8.8.8`
+  + IPv4 Address: `192.168.1.101`
+  + Subnet Mask: `255.255.255.224`
+  + Default Gateway: `192.168.1.97`
+  + DNS Server: `192.168.1.99`
 
 ###### Servidor HTTP
 
 **`Server-PT`**: `HTTP` - servidor de HTTP (*HyperText Transfer Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.0.6`
-  + Subnet Mask: `255.255.255.0`
-  + Default Gateway: `192.168.0.1`
-  + DNS Server:`8.8.8.8`
+  + IPv4 Address: `192.168.1.102`
+  + Subnet Mask: `255.255.255.224`
+  + Default Gateway: `192.168.1.97`
+  + DNS Server: `192.168.1.99`
 
 ###### Servidor de Registo IoT
 
 **`Server-PT`** - servidor de Registo IoT (*Internet of Things*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.0.7`
-  + Subnet Mask: `255.255.255.0`
-  + Default Gateway: `192.168.0.1`
-  + DNS Server:`8.8.8.8`
+  + IPv4 Address: `192.168.1.103`
+  + Subnet Mask: `255.255.255.224`
+  + Default Gateway: `192.168.1.97`
+  + DNS Server: `192.168.1.99`
+
+###### *Network Controller*
+
+**`NetworkController`**: `OrienteControl` - controlador de rede
++ `Gigabit Ethernet 0`: ligação ao `Server Switch`
+  + IPv4 Address: `192.168.1.104`
+  + Subnet Mask: `255.255.255.224`
+  + Default Gateway: `192.168.1.97`
+  + DNS Server: `192.168.1.99`
 
 ##### Configuração do Computador do Administrador de Sistemas
 
 **`PC-PT`**: `OrienteAdmin` - computador do administrador de sistemas do edifício XPTOtec_Oriente
 + `Fast Ethernet 0`: ligação ao `First floor Switch`
-  + IPv4 Address: `192.168.0.6`
-  + Subnet Mask: `255.255.255.0`
-  + Default Gateway: `192.168.0.1`
-  + DNS Server:`8.8.8.8`
+  + IPv4 Address: `192.168.1.105`
+  + Subnet Mask: `255.255.255.224`
+  + Default Gateway: `192.168.1.97`
+  + DNS Server: `192.168.1.99`
 
 ##### Configuração da IoT
 
@@ -182,7 +224,7 @@ Realizado por:
   + IPv4 Address: `192.168.1.108 /27`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.107`
-  + DNS Server:`8.8.8.8`
+  + DNS Server: `192.168.1.99`
 
 ###### Servidor de Email
 
@@ -191,7 +233,7 @@ Realizado por:
   + IPv4 Address: `192.168.1.109 /27`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.107`
-  + DNS Server:`8.8.8.8`
+  + DNS Server: `192.168.1.99`
 
 ###### Servidor FTP
 
@@ -200,7 +242,7 @@ Realizado por:
   + IPv4 Address: `192.168.1.110 /27`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.107`
-  + DNS Server:`8.8.8.8`
+  + DNS Server: `192.168.1.99`
 
 ###### Servidor HTTP
 
@@ -209,7 +251,7 @@ Realizado por:
   + IPv4 Address: `192.168.1.111 /27`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.107`
-  + DNS Server:`8.8.8.8`
+  + DNS Server: `192.168.1.99`
 
 ###### Servidor de Registo IoT
 
@@ -218,7 +260,7 @@ Realizado por:
   + IPv4 Address: `192.168.1.112 /27`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.107`
-  + DNS Server:`8.8.8.8`
+  + DNS Server: `192.168.1.99`
 
 ##### Configuração do Computador do Administrador de Sistemas
 
@@ -227,7 +269,7 @@ Realizado por:
   + IPv4 Address: `192.168.1.113 /27`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.107`
-  + DNS Server:`8.8.8.8`
+  + DNS Server: `192.168.1.99`
 
 ##### Configuração do Computador-exemplo
 
@@ -290,7 +332,7 @@ Realizado por:
   + IPv4 Address: `192.168.1.118 /27`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
-  + DNS Server:`8.8.8.8`
+  + DNS Server: `192.168.1.99`
 
 ###### Servidor de Email
 
@@ -299,7 +341,7 @@ Realizado por:
   + IPv4 Address: `192.168.1.119 /27`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
-  + DNS Server:`8.8.8.8`
+  + DNS Server: `192.168.1.99`
 
 ###### Servidor FTP
 
@@ -308,7 +350,7 @@ Realizado por:
   + IPv4 Address: `192.168.1.120 /27`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
-  + DNS Server:`8.8.8.8`
+  + DNS Server: `192.168.1.99`
 
 ###### Servidor HTTP
 
@@ -317,7 +359,7 @@ Realizado por:
   + IPv4 Address: `192.168.1.121 /27`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
-  + DNS Server:`8.8.8.8`
+  + DNS Server: `192.168.1.99`
 
 ###### Servidor de Registo IoT
 
@@ -326,7 +368,7 @@ Realizado por:
   + IPv4 Address: `192.168.1.122 /27`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
-  + DNS Server:`8.8.8.8`
+  + DNS Server: `192.168.1.99`
 
 ##### Configuração do Computador do Administrador de Sistemas
 
@@ -335,7 +377,7 @@ Realizado por:
   + IPv4 Address: `192.168.1.123 /27`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
-  + DNS Server:`8.8.8.8`
+  + DNS Server: `192.168.1.99`
 
 ##### Configuração do Computador-exemplo
 
@@ -367,37 +409,37 @@ Lado interno da empresa:
   + IPv4 Address: `Set by DHCP SERVER`
   + Subnet Mask: `Set by DHCP SERVER`
   + Default Gateway: `192.168.8.1`
-  + DNS Server:`192.168.8.8`
+  + DNS Server: `192.168.8.8`
 + **`Linux 1`** - *PC* ligado ao `Switch0`;
   + IPv4 Address: `Set by DHCP SERVER`
   + Subnet Mask: `Set by DHCP SERVER`
   + Default Gateway: `192.168.8.1`
-  + DNS Server:`192.168.8.8`
+  + DNS Server: `192.168.8.8`
 + **`Linux 2`** - *PC* ligado ao `Switch0`;
   + IPv4 Address: `Set by DHCP SERVER`
   + Subnet Mask: `Set by DHCP SERVER`
   + Default Gateway: `192.168.8.1`
-  + DNS Server:`192.168.8.8`
+  + DNS Server: `192.168.8.8`
 + **`NTP Server`** - *Server* ligado ao `Switch0`;
   + IPv4 Address: `192.168.8.10`
   + Subnet Mask: `255.255.255.0`
   + Default Gateway: `192.168.8.1`
-  + DNS Server:`192.168.8.8`
+  + DNS Server: `192.168.8.8`
 + **`NAS`** - *Server* ligado ao `Switch0`;
   + IPv4 Address: `192.168.8.11`
   + Subnet Mask: `255.255.255.0`
   + Default Gateway: `192.168.8.1`
-  + DNS Server:`192.168.8.8`
+  + DNS Server: `192.168.8.8`
 + **`www.empresa`** - *Server* ligado ao `Switch0`;
   + IPv4 Address: `192.168.8.12`
   + Subnet Mask: `255.255.255.0`
   + Default Gateway: `192.168.8.1`
-  + DNS Server:`192.168.8.8`
+  + DNS Server: `192.168.8.8`
 + **`DNS 192.168.8.8`** - *Server* ligado ao `Switch0`;
   + IPv4 Address: `192.168.8.8`
   + Subnet Mask: `255.255.255.0`
   + Default Gateway: `192.168.8.1`
-  + DNS Server:`192.168.8.8`
+  + DNS Server: `192.168.8.8`
 + **`Switch0`** - *Switch* ligado ao `Router`.
 + Configuração do **`Router Principal`**:
   + `Ethernet 0/0/0`:
@@ -413,12 +455,12 @@ Segundo Espaço da Empresa:
   + IPv4 Address: `Set by DHCP SERVER`
   + Subnet Mask: `Set by DHCP SERVER`
   + Default Gateway: `192.168.8.1`
-  + DNS Server:`192.168.8.8`
+  + DNS Server: `192.168.8.8`
 + **`Linux6`** - *PC* ligado ao `Switch0`;
   + IPv4 Address: `Set by DHCP SERVER`
   + Subnet Mask: `Set by DHCP SERVER`
   + Default Gateway: `192.168.8.1`
-  + DNS Server:`192.168.8.8`
+  + DNS Server: `192.168.8.8`
 + **`Switch0`** - *Switch* ligado ao `Router`.
 + Configuração do **`Router Secundario`**:
   + `Ethernet 0/0/0`:
