@@ -22,12 +22,7 @@ O endereço `8.8.8.8` é o DNS da Google. É utilizado por conveniência quando 
 
 ## Endereços IPv4
 
-A rede `192.168.x.x` é uma gama de endereços privados de classe C, cuja máscara de subrede é `255.255.255.0/24`, com um máximo de 254 *hosts*.
+URL: https://www.cloudaccess.net/cloud-control-panel-ccp/157-dns-management/322-subnet-masks-reference-table.html
+URL: https://www.calculator.net/ip-subnet-calculator.html?cclass=c&csubnet=27&cip=192.168.1.127&ctype=ipv4&printit=0&x=0&y=0
 
-A rede `172.16.x.x` é uma gama de endereços privados de classe B, cuja máscara de subrede é `255.255.0.0/16`, com um máximo de 65534 *hosts*.
-
-A rede `10.0.x.x` é uma gama de endereços privados de classe A, cuja máscara de subrede é `255.0.0.0/8`, com um máximo de 16777214 *hosts*.
-
-:::warning
-Todas as subredes podem ser do tipo 255.255.255.0/24 (254 *hosts* no máximo). Ficam todas `/24` ou alteram-se (classe A e B) para poder ter mais anfitriões?
-:::
+A rede `192.168.1.x` é uma gama de endereços privados de classe C, cuja máscara de subrede é `255.255.255.224/27`, com um máximo de 30 *hosts*. Escolheu-se esta rede para os endereços estáticos dos servidores e do computador do administrador de sistemas. A rede do edifício XPTOtec_Oriente permite a inserção de mais três dispositivos; as redes dos edifícios XPTOtec_Nascente e XPTOtec_Leste permitem a inserção de mais quatro dispositivos.
