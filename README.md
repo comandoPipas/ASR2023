@@ -113,6 +113,15 @@ Realizado por:
   + Default Gateway: `192.168.1.97`
   + DNS Server: `192.168.1.99`
 + Serviços DHCP
+  + Rede base
+    + Pool Name: `serverpool`
+    + Default Gateway: `192.168.1.97`
+    + DNS Server: `192.168.1.99`
+    + Start IP Address: `192.168.1.106`
+    + Subnet Mask: `255.255.255.224`
+    + Maximum Number of Users: 10
+    + TFTP Server: `192.168.1.101`
+    + WLC Address: `0.0.0.0`
   + Rede dos dispositivos IoT
     + Pool Name: `iotoriente`
     + Default Gateway: `192.168.2.1`
@@ -313,41 +322,65 @@ Realizado por:
 
 #### Piso 0
 
-##### Configuração do *Router*
+##### Configuração dos *Routers*
 
 **`Router-PT`**: `Main Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.10.25`
+  + Subnet Mask: `255.255.255.248`
 + `Gigabit Ethernet 6/0`: ligação ao `Oriente` (*multiuser*)
 + `Gigabit Ethernet 7/0`: ligação ao `Leste` (*multiuser*)
++ `Routing RIP`
+  + `192.168.1.0`: rede dos servidores
+  + `192.168.2.0`: rede dos dispositivos IoT
+  + `192.168.3.0`: rede dos PCs do primeiro piso
+  + `192.168.4.0`: rede dos PCs do segundo piso
+  + `192.168.10.0`: rede entre os *routers*
 
 **`Router-PT`**: `Server Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.10.26`
+  + Subnet Mask: `255.255.255.248`
 + `Fast Ethernet 1/0`: ligação ao `Server Switch`
   + IPv4 Address: `192.168.1.107`
   + Subnet Mask: `255.255.255.224`
++ `Routing RIP`
+  + `192.168.1.0`: rede dos servidores
+  + `192.168.2.0`: rede dos dispositivos IoT
+  + `192.168.3.0`: rede dos PCs do primeiro piso
+  + `192.168.4.0`: rede dos PCs do segundo piso
+  + `192.168.10.0`: rede entre os *routers*
 
 **`Router-PT`**: `IoT Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.10.27`
+  + Subnet Mask: `255.255.255.248`
 + `Fast Ethernet 1/0`: ligação ao `IoT Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.2.1`
+  + Subnet Mask: `255.255.255.0`
++ `Routing RIP`
+  + `192.168.1.0`: rede dos servidores
+  + `192.168.2.0`: rede dos dispositivos IoT
+  + `192.168.3.0`: rede dos PCs do primeiro piso
+  + `192.168.4.0`: rede dos PCs do segundo piso
+  + `192.168.10.0`: rede entre os *routers*
 
 **`Router-PT`**: `PC Network Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.10.28`
+  + Subnet Mask: `255.255.255.248`
 + `Fast Ethernet 1/0`: ligação ao `First Floor Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.3.1`
+  + Subnet Mask: `255.255.255.192`
 + `Fast Ethernet 6/0`: ligação ao `Second Floor Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.4.1`
+  + Subnet Mask: `255.255.255.192`
++ `Routing RIP`
+  + `192.168.1.0`: rede dos servidores
+  + `192.168.2.0`: rede dos dispositivos IoT
+  + `192.168.3.0`: rede dos PCs do primeiro piso
+  + `192.168.4.0`: rede dos PCs do segundo piso
+  + `192.168.10.0`: rede entre os *routers*
 
 ##### Configuração dos *Switches*
 
@@ -380,6 +413,43 @@ Realizado por:
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.107`
   + DNS Server: `192.168.1.99`
++ Serviços DHCP
+  + Rede base
+    + Pool Name: `serverpool`
+    + Default Gateway: `192.168.1.97`
+    + DNS Server: `192.168.1.99`
+    + Start IP Address: `192.168.1.106`
+    + Subnet Mask: `255.255.255.224`
+    + Maximum Number of Users: 10
+    + TFTP Server: `192.168.1.101`
+    + WLC Address: `0.0.0.0`
+  + Rede dos dispositivos IoT
+    + Pool Name: `iotnascente`
+    + Default Gateway: `192.168.2.1`
+    + DNS Server: `192.168.1.99`
+    + Start IP Address: `192.168.2.2`
+    + Subnet Mask: `255.255.255.0`
+    + Maximum Number of Users: 254
+    + TFTP Server: `192.168.1.101`
+    + WLC Address: `0.0.0.0`
+  + Rede de PCs do piso 1
+    + Pool Name: `primeiropiso`
+    + Default Gateway: `192.168.3.1`
+    + DNS Server: `192.168.1.99`
+    + Start IP Address: `192.168.3.2`
+    + Subnet Mask: `255.255.255.192`
+    + Maximum Number of Users: 30
+    + TFTP Server: `192.168.1.101`
+    + WLC Address: `0.0.0.0`
+  + Rede de PCs do piso 2
+    + Pool Name: `segundopiso`
+    + Default Gateway: `192.168.4.1`
+    + DNS Server: `192.168.1.99`
+    + Start IP Address: `192.168.4.2`
+    + Subnet Mask: `255.255.255.192`
+    + Maximum Number of Users: 30
+    + TFTP Server: `192.168.1.101`
+    + WLC Address: `0.0.0.0`
 
 ###### Servidor de Email
 
@@ -389,6 +459,11 @@ Realizado por:
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.107`
   + DNS Server: `192.168.1.99`
++ Serviços Email
+  + Domain Name: `nascente.xpto.tec`
+    + User: `admin` | Password: `admin`
+    + User: `user1` | Password: `password`
+    + User: `user2` | Password: `password`
 
 ###### Servidor FTP
 
@@ -463,38 +538,58 @@ Realizado por:
 
 #### Piso 1
 
-##### Configuração do *Router*
+##### Configuração dos *Routers*
 
 **`Router-PT`**: `Main Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.10.25`
+  + Subnet Mask: `255.255.255.248`
 + `Gigabit Ethernet 6/0`: ligação ao `Nascente` (*multiuser*)
 + `Gigabit Ethernet 7/0`: ligação ao `Oriente` (*multiuser*)
++ `Routing RIP`
+  + `192.168.1.0`: rede dos servidores
+  + `192.168.2.0`: rede dos dispositivos IoT
+  + `192.168.3.0`: rede dos PCs do segundo piso
+  + `192.168.10.0`: rede entre os *routers*
 
 **`Router-PT`**: `Server Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.10.26`
+  + Subnet Mask: `255.255.255.248`
 + `Fast Ethernet 1/0`: ligação ao `Server Switch`
   + IPv4 Address: `192.168.1.117`
   + Subnet Mask: `255.255.255.224`
++ `Routing RIP`
+  + `192.168.1.0`: rede dos servidores
+  + `192.168.2.0`: rede dos dispositivos IoT
+  + `192.168.3.0`: rede dos PCs do segundo piso
+  + `192.168.10.0`: rede entre os *routers*
 
 **`Router-PT`**: `IoT Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.10.27`
+  + Subnet Mask: `255.255.255.248`
 + `Fast Ethernet 0/1`: ligação ao `IoT Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.2.1`
+  + Subnet Mask: `255.255.255.0`
++ `Routing RIP`
+  + `192.168.1.0`: rede dos servidores
+  + `192.168.2.0`: rede dos dispositivos IoT
+  + `192.168.3.0`: rede dos PCs do segundo piso
+  + `192.168.10.0`: rede entre os *routers*
 
 **`Router-PT`**: `PC Network Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.10.28`
+  + Subnet Mask: `255.255.255.248`
 + `Fast Ethernet 1/0`: ligação ao `Second Floor Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.3.1`
+  + Subnet Mask: `255.255.255.192`
++ `Routing RIP`
+  + `192.168.1.0`: rede dos servidores
+  + `192.168.2.0`: rede dos dispositivos IoT
+  + `192.168.3.0`: rede dos PCs do segundo piso
+  + `192.168.10.0`: rede entre os *routers*
 
 ##### Configuração dos *Switches*
 
@@ -527,6 +622,34 @@ Realizado por:
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
   + DNS Server: `192.168.1.99`
++ Serviços DHCP
+  + Rede base
+    + Pool Name: `serverpool`
+    + Default Gateway: `192.168.1.97`
+    + DNS Server: `192.168.1.99`
+    + Start IP Address: `192.168.1.106`
+    + Subnet Mask: `255.255.255.224`
+    + Maximum Number of Users: 10
+    + TFTP Server: `192.168.1.101`
+    + WLC Address: `0.0.0.0`
+  + Rede dos dispositivos IoT
+    + Pool Name: `iotleste`
+    + Default Gateway: `192.168.2.1`
+    + DNS Server: `192.168.1.99`
+    + Start IP Address: `192.168.2.2`
+    + Subnet Mask: `255.255.255.0`
+    + Maximum Number of Users: 254
+    + TFTP Server: `192.168.1.101`
+    + WLC Address: `0.0.0.0`
+  + Rede de PCs do piso 2
+    + Pool Name: `segundopiso`
+    + Default Gateway: `192.168.3.1`
+    + DNS Server: `192.168.1.99`
+    + Start IP Address: `192.168.3.2`
+    + Subnet Mask: `255.255.255.192`
+    + Maximum Number of Users: 30
+    + TFTP Server: `192.168.1.101`
+    + WLC Address: `0.0.0.0`
 
 ###### Servidor de Email
 
@@ -536,6 +659,11 @@ Realizado por:
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
   + DNS Server: `192.168.1.99`
++ Serviços Email
+  + Domain Name: `leste.xpto.tec`
+    + User: `admin` | Password: `admin`
+    + User: `user1` | Password: `password`
+    + User: `user2` | Password: `password`
 
 ###### Servidor FTP
 
@@ -557,7 +685,7 @@ Realizado por:
 
 ###### Servidor de Registo IoT
 
-**`Server-PT`** - servidor de Registo IoT (*Internet of Things*)
+**`Server-PT`**: `Registo IoT` - servidor de Registo IoT (*Internet of Things*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
   + IPv4 Address: `192.168.1.122`
   + Subnet Mask: `255.255.255.224`
