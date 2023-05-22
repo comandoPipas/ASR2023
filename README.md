@@ -19,7 +19,7 @@ Realizado por:
 
 #### Piso 0
 
-##### Configuração do *Router*
+##### Configuração dos *Routers*
 
 **`Router-PT`**: `Main Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
@@ -100,7 +100,7 @@ Realizado por:
 
 **`2960-24TT`**: `IoT Switch`
 + `Gigabit Ethernet 0/1`: ligação ao `IoT Router`
-+ `Fast Ethernet 0/1`: ligação a 
++ `Fast Ethernet 0/1`: ligação a `Access Point IoT`
 
 ##### Configuração dos Servidores
 
@@ -114,17 +114,17 @@ Realizado por:
   + DNS Server: `192.168.1.99`
 + Serviços DHCP
   + Rede dos dispositivos IoT
-    + Pool Name:
-    + Default Gateway: 
+    + Pool Name: `iotoriente`
+    + Default Gateway: `192.168.2.1`
     + DNS Server: `192.168.1.99`
-    + Start IP Address: 
-    + Subnet Mask:
-    + Maximum Number of Users:
+    + Start IP Address: `192.168.2.2`
+    + Subnet Mask: `255.255.255.0`
+    + Maximum Number of Users: 254
     + TFTP Server: `192.168.1.101`
     + WLC Address: `0.0.0.0`
   + Rede de PCs do piso 1
-    + Pool Name:
-    + Default Gateway: 
+    + Pool Name: `primeiropiso`
+    + Default Gateway: `192.168.3.1`
     + DNS Server: `192.168.1.99`
     + Start IP Address: `192.168.3.2`
     + Subnet Mask: `255.255.255.192`
@@ -132,12 +132,12 @@ Realizado por:
     + TFTP Server: `192.168.1.101`
     + WLC Address: `0.0.0.0`
   + Rede de PCs do piso 2
-    + Pool Name:
-    + Default Gateway: 
+    + Pool Name: `segundopiso`
+    + Default Gateway: `192.168.4.1`
     + DNS Server: `192.168.1.99`
     + Start IP Address: `192.168.4.2`
     + Subnet Mask: `255.255.255.192`
-    + Maximum Number of Users:
+    + Maximum Number of Users: 30
     + TFTP Server: `192.168.1.101`
     + WLC Address: `0.0.0.0`
 
@@ -149,6 +149,27 @@ Realizado por:
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.97`
   + DNS Server: `192.168.1.99`
++ Serviços DNS
+  + *Network Controller*
+    + Name: `adminmachine`
+    + Type: `A Record`
+    + Detail: `192.168.1.104`
+  + DNS (endereço textual)
+    + Name: `dns.tec`
+    + Type: `NS`
+    + Detail: `ns1.xpto.tec`
+  + Email
+    + Name: `mail.xpto.tec`
+    + Type: `A Record`
+    + Detail: `192.168.1.100`
+  + DNS (endereço IP)
+    + Name: `ns1.xpto.tec`
+    + Type: `A Record`
+    + Detail: `192.168.1.99`
+  + HTTP
+    + Name: `xpto.tec`
+    + Type: `A Record`
+    + Detail: `192.168.1.102`
 
 ###### Servidor de Email
 
@@ -158,6 +179,12 @@ Realizado por:
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.97`
   + DNS Server: `192.168.1.99`
++ Serviços Email
+  + Domain Name: `xpto.tec`
+    + User: `password` | Password: `user`
+    + User: `user` | Password: `password`
+    + User: `admin` | Password: `password`
+    + User: `ceo` | Password: `password`
 
 ###### Servidor TFTP
 
@@ -179,7 +206,7 @@ Realizado por:
 
 ###### Servidor de Registo IoT
 
-**`Server-PT`** - servidor de Registo IoT (*Internet of Things*)
+**`Server-PT`**: `IoT Register` - servidor de Registo IoT (*Internet of Things*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
   + IPv4 Address: `192.168.1.103`
   + Subnet Mask: `255.255.255.224`
@@ -203,8 +230,38 @@ Realizado por:
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.97`
   + DNS Server: `192.168.1.99`
++ Desktop > Web Browser > `adminmachine`
+  + Login:
+    + Username: `admin`
+    + Password: `admin`
+  + Menu > Provisioning > Credentials
+    + \+ Credential
+      + Username: `admin`
+      + Password: `admin`
+      + Enable Password: `admin`
+      + Description: `admin`
+  + Menu > Provisioning > Network Device
+    + \+ Device
+      + IP Address: `192.168.1.97`
+      + CLI Credential: `admin - admin`
+    + \+ Device
+      + IP Address: `192.168.2.1`
+      + CLI Credential: `admin - admin`
+    + \+ Device
+      + IP Address: `192.168.4.1`
+      + CLI Credential: `admin - admin`
+  + Menu > Assurance > Hosts
+    + ??
 
 ##### Configuração da IoT
+
+**`AccessPoint-PT`**: `Access Point IoT` - *access point* para dispositivos de IoT
++ `Port 1`: ligação por *wireless*
+  + SSID: `IoT Network`
+  + 2.4GHz Channel: 1
+  + Coverage Range: 50
+  + Authentication: `WPA2-PSK`
+    + PSK Pass Phrase: `password`
 
 ###### Ar Condicionado
 
@@ -237,6 +294,16 @@ Realizado por:
 
 **`2960-24TT`**: `Second Floor Switch`
 + `Gigabit Ethernet 0/1`: ligação ao `PC Network Router`
+
+##### Configuração do *Access Point*
+
+**`AccessPoint-PT`**: `nome` - *access point* para dispositivos convidados
++ `Port 1`: ligação por *wireless*
+  + SSID: `convidados`
+  + 2.4GHz Channel: 6
+  + Coverage Range: 50
+  + Authentication: `WPA2-PSK`
+    + PSK Pass Phrase: `guests@xpto`
 
 ##### Configuração do Computador-exemplo
 
