@@ -23,37 +23,61 @@ Realizado por:
 
 **`Router-PT`**: `Main Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.10.25`
+  + Subnet Mask: `255.255.255.248`
 + `Gigabit Ethernet 6/0`: ligação ao `Nascente` (*multiuser*)
 + `Gigabit Ethernet 7/0`: ligação ao `Leste` (*multiuser*)
++ `Routing RIP`
+  + `192.168.1.0`: rede dos servidores
+  + `192.168.2.0`: rede dos dispositivos IoT
+  + `192.168.3.0`: rede dos PCs do primeiro piso
+  + `192.168.4.0`: rede dos PCs do segundo piso
+  + `192.168.10.0`: rede entre os *routers*
 
 **`Router-PT`**: `Server Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.10.26`
+  + Subnet Mask: `255.255.255.248`
 + `Fast Ethernet 1/0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.97 /27`
+  + IPv4 Address: `192.168.1.97`
   + Subnet Mask: `255.255.255.224`
++ `Routing RIP`
+  + `192.168.1.0`: rede dos servidores
+  + `192.168.2.0`: rede dos dispositivos IoT
+  + `192.168.3.0`: rede dos PCs do primeiro piso
+  + `192.168.4.0`: rede dos PCs do segundo piso
+  + `192.168.10.0`: rede entre os *routers*
 
 **`Router-PT`**: `IoT Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.10.27`
+  + Subnet Mask: `255.255.255.248`
 + `Fast Ethernet 0/1`: ligação ao `IoT Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.2.1`
+  + Subnet Mask: `255.255.255.0`
++ `Routing RIP`
+  + `192.168.1.0`: rede dos servidores
+  + `192.168.2.0`: rede dos dispositivos IoT
+  + `192.168.3.0`: rede dos PCs do primeiro piso
+  + `192.168.4.0`: rede dos PCs do segundo piso
+  + `192.168.10.0`: rede entre os *routers*
 
 **`Router-PT`**: `PC Network Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.10.28`
+  + Subnet Mask: `255.255.255.248`
 + `Fast Ethernet 1/0`: ligação ao `First Floor Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.3.1`
+  + Subnet Mask: `255.255.255.192`
 + `Fast Ethernet 6/0`: ligação ao `Second Floor Switch`
-  + IPv4 Address: `x.x.x.x`
-  + Subnet Mask: `x.x.x.x`
+  + IPv4 Address: `192.168.4.1`
+  + Subnet Mask: `255.255.255.192`
++ `Routing RIP`
+  + `192.168.1.0`: rede dos servidores
+  + `192.168.2.0`: rede dos dispositivos IoT
+  + `192.168.3.0`: rede dos PCs do primeiro piso
+  + `192.168.4.0`: rede dos PCs do segundo piso
+  + `192.168.10.0`: rede entre os *routers*
 
 ##### Configuração dos *Switches*
 
@@ -84,16 +108,44 @@ Realizado por:
 
 **`Server-PT`**: `DHCP` - servidor de DHCP (*Dynamic Host Configuration Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.98 /27`
+  + IPv4 Address: `192.168.1.98`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.97`
   + DNS Server: `192.168.1.99`
++ Serviços DHCP
+  + Rede dos dispositivos IoT
+    + Pool Name:
+    + Default Gateway: 
+    + DNS Server: `192.168.1.99`
+    + Start IP Address: 
+    + Subnet Mask:
+    + Maximum Number of Users:
+    + TFTP Server: `192.168.1.101`
+    + WLC Address: `0.0.0.0`
+  + Rede de PCs do piso 1
+    + Pool Name:
+    + Default Gateway: 
+    + DNS Server: `192.168.1.99`
+    + Start IP Address: `192.168.3.2`
+    + Subnet Mask: `255.255.255.192`
+    + Maximum Number of Users: 30
+    + TFTP Server: `192.168.1.101`
+    + WLC Address: `0.0.0.0`
+  + Rede de PCs do piso 2
+    + Pool Name:
+    + Default Gateway: 
+    + DNS Server: `192.168.1.99`
+    + Start IP Address: `192.168.4.2`
+    + Subnet Mask: `255.255.255.192`
+    + Maximum Number of Users:
+    + TFTP Server: `192.168.1.101`
+    + WLC Address: `0.0.0.0`
 
 ###### Servidor DNS
 
 **`Server-PT`**: `DNS` - servidor de DNS (*Domain Name Service*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.99 /27`
+  + IPv4 Address: `192.168.1.99`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.97`
   + DNS Server: `192.168.1.99`
@@ -208,7 +260,7 @@ Realizado por:
   + IPv4 Address: `x.x.x.x`
   + Subnet Mask: `x.x.x.x`
 + `Fast Ethernet 1/0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.107 /27`
+  + IPv4 Address: `192.168.1.107`
   + Subnet Mask: `255.255.255.224`
 
 **`Router-PT`**: `IoT Router`
@@ -257,7 +309,7 @@ Realizado por:
 
 **`Server-PT`**: `DHCP` - servidor de DHCP (*Dynamic Host Configuration Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.108 /27`
+  + IPv4 Address: `192.168.1.108`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.107`
   + DNS Server: `192.168.1.99`
@@ -266,7 +318,7 @@ Realizado por:
 
 **`Server-PT`**: `Email` - servidor de e-mail
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.109 /27`
+  + IPv4 Address: `192.168.1.109`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.107`
   + DNS Server: `192.168.1.99`
@@ -275,7 +327,7 @@ Realizado por:
 
 **`Server-PT`**: `FTP` - servidor de FTP (*File Transfer Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.110 /27`
+  + IPv4 Address: `192.168.1.110`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.107`
   + DNS Server: `192.168.1.99`
@@ -284,7 +336,7 @@ Realizado por:
 
 **`Server-PT`**: `HTTP` - servidor de HTTP (*HyperText Transfer Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.111 /27`
+  + IPv4 Address: `192.168.1.111`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.107`
   + DNS Server: `192.168.1.99`
@@ -293,7 +345,7 @@ Realizado por:
 
 **`Server-PT`** - servidor de Registo IoT (*Internet of Things*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.112 /27`
+  + IPv4 Address: `192.168.1.112`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.107`
   + DNS Server: `192.168.1.99`
@@ -302,7 +354,7 @@ Realizado por:
 
 **`NetworkController`**: `NascenteController` - controlador de rede
 + `Gigabit Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.113 /27`
+  + IPv4 Address: `192.168.1.113`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.107`
   + DNS Server: `192.168.1.99`
@@ -311,7 +363,7 @@ Realizado por:
 
 **`PC-PT`**: `NascenteAdmin` - computador do administrador de sistemas do edifício XPTOtec_Nascente
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.114 /27`
+  + IPv4 Address: `192.168.1.114`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.107`
   + DNS Server: `192.168.1.99`
@@ -358,7 +410,7 @@ Realizado por:
   + IPv4 Address: `x.x.x.x`
   + Subnet Mask: `x.x.x.x`
 + `Fast Ethernet 1/0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.117 /27`
+  + IPv4 Address: `192.168.1.117`
   + Subnet Mask: `255.255.255.224`
 
 **`Router-PT`**: `IoT Router`
@@ -404,7 +456,7 @@ Realizado por:
 
 **`Server-PT`**: `DHCP` - servidor de DHCP (*Dynamic Host Configuration Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.118 /27`
+  + IPv4 Address: `192.168.1.118`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
   + DNS Server: `192.168.1.99`
@@ -413,7 +465,7 @@ Realizado por:
 
 **`Server-PT`**: `Email` - servidor de e-mail
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.119 /27`
+  + IPv4 Address: `192.168.1.119`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
   + DNS Server: `192.168.1.99`
@@ -422,7 +474,7 @@ Realizado por:
 
 **`Server-PT`**: `FTP` - servidor de FTP (*File Transfer Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.120 /27`
+  + IPv4 Address: `192.168.1.120`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
   + DNS Server: `192.168.1.99`
@@ -431,7 +483,7 @@ Realizado por:
 
 **`Server-PT`**: `HTTP` - servidor de HTTP (*HyperText Transfer Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.121 /27`
+  + IPv4 Address: `192.168.1.121`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
   + DNS Server: `192.168.1.99`
@@ -440,7 +492,7 @@ Realizado por:
 
 **`Server-PT`** - servidor de Registo IoT (*Internet of Things*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.122 /27`
+  + IPv4 Address: `192.168.1.122`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
   + DNS Server: `192.168.1.99`
@@ -449,7 +501,7 @@ Realizado por:
 
 **`NetworkController`**: `LesteController` - controlador de rede
 + `Gigabit Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.123 /27`
+  + IPv4 Address: `192.168.1.123`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
   + DNS Server: `192.168.1.99`
@@ -458,7 +510,7 @@ Realizado por:
 
 **`PC-PT`**: `LesteAdmin` - computador do administrador de sistemas do edifício XPTOtec_Leste
 + `Fast Ethernet 0`: ligação ao `Main Switch`
-  + IPv4 Address: `192.168.1.124 /27`
+  + IPv4 Address: `192.168.1.124`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
   + DNS Server: `192.168.1.99`

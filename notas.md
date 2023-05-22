@@ -1,7 +1,5 @@
 # Notas
 
-###### Outras anotações que possam vir a ser úteis para o projeto/defesa
-
 ## Equipamentos
 
 ### *Routers*
@@ -11,6 +9,12 @@ Cada edifício tem quatro *routers*:
 * O *router* da subrede dos servidores;
 * O *router* da subrede dos dispositivos de IoT;
 * O *router* da subrede dos computadores pessoais.
+
+Em todos os *routers* é necessário configurar o RIP.
+
+### *Switches*
+
+*Switches* permitem fazer *ping*.
 
 ## *Multiuser Connection*
 
@@ -35,4 +39,10 @@ O endereço `8.8.8.8` é o DNS da Google. É utilizado por conveniência quando 
 URL: https://www.cloudaccess.net/cloud-control-panel-ccp/157-dns-management/322-subnet-masks-reference-table.html
 URL: https://www.calculator.net/ip-subnet-calculator.html?cclass=c&csubnet=27&cip=192.168.1.127&ctype=ipv4&printit=0&x=0&y=0
 
-A rede `192.168.1.x` é uma gama de endereços privados de classe C, cuja máscara de subrede é `255.255.255.224/27`, com um máximo de 30 *hosts*. Escolheu-se esta rede para os endereços estáticos dos servidores e do computador do administrador de sistemas. A rede do edifício XPTOtec_Oriente permite a inserção de mais um dispositivo; as redes dos edifícios XPTOtec_Nascente e XPTOtec_Leste permitem a inserção de mais dois dispositivos.
+A rede `192.168.1.0` pertence à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.255.224`, ou seja, com 27 bits de rede, possui um máximo de 30 *hosts*. Escolheu-se esta rede, com esta submáscara, para os endereços estáticos dos servidores, do computador do administrador de sistemas e do *network controller*. A rede do edifício XPTOtec_Oriente permite a inserção de mais um dispositivo; as redes dos edifícios XPTOtec_Nascente e XPTOtec_Leste permitem a inserção de mais dois dispositivos.
+
+A rede `192.168.2.0` pertence à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.255.0`, ou seja, com 24 bits de rede, possui um máximo de 254 *hosts*. Escolheu-se esta rede, com esta submáscara, para os endereços dinâmicos dos dispositivos de IoT.
+
+As redes `192.168.3.0` e `192.168.4.0` pertencem à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.192`, ou seja, com 26 bits de rede, possuem um máximo de 62 *hosts* cada. Escolheram-se estas redes, com estas submáscaras, para os endereços dinâmicos dos computadores pessoais dos colaboradores da empresa em cada piso.
+
+A rede `192.168.10.0` pertence à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.255.248`, ou seja, com 29 bits de rede, possui um máximo de 6 *hosts*. Escolheu-se esta rede, com esta submáscara, para os endereços estáticos da rede interna aos *routers*.
