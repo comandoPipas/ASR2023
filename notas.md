@@ -5,6 +5,7 @@
 ### *Routers*
 
 Cada edifício tem quatro *routers*:
+
 * O *router* principal, que faz ligação com os outros edifícios (e a Internet, no caso do XPTOtec_Oriente);
 * O *router* da subrede dos servidores;
 * O *router* da subrede dos dispositivos de IoT;
