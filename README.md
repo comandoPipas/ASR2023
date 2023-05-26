@@ -35,6 +35,7 @@ Realizado por:
   + `192.168.4.0`: rede dos PCs do segundo piso
   + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
++ CLI (após configurações): `copy running-config startup-config`
 
 **`Router-PT`**: `Server Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
@@ -52,6 +53,7 @@ Realizado por:
   + `192.168.4.0`: rede dos PCs do segundo piso
   + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
++ CLI (após configurações): `copy running-config startup-config`
 
 **`Router-PT`**: `IoT Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
@@ -69,6 +71,7 @@ Realizado por:
   + `192.168.4.0`: rede dos PCs do segundo piso
   + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
++ CLI (após configurações): `copy running-config startup-config`
 
 **`Router-PT`**: `PC Network Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
@@ -94,6 +97,7 @@ Realizado por:
   + `192.168.4.0`: rede dos PCs do segundo piso
   + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
++ CLI (após configurações): `copy running-config startup-config`
 
 ##### Configuração dos *Switches*
 
@@ -460,7 +464,9 @@ Realizado por:
   + `192.168.2.0`: rede dos dispositivos IoT
   + `192.168.3.0`: rede dos PCs do primeiro piso
   + `192.168.4.0`: rede dos PCs do segundo piso
+  + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
++ CLI (após configurações): `copy running-config startup-config`
 
 **`Router-PT`**: `Server Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
@@ -476,7 +482,9 @@ Realizado por:
   + `192.168.2.0`: rede dos dispositivos IoT
   + `192.168.3.0`: rede dos PCs do primeiro piso
   + `192.168.4.0`: rede dos PCs do segundo piso
+  + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
++ CLI (após configurações): `copy running-config startup-config`
 
 **`Router-PT`**: `IoT Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
@@ -492,7 +500,9 @@ Realizado por:
   + `192.168.2.0`: rede dos dispositivos IoT
   + `192.168.3.0`: rede dos PCs do primeiro piso
   + `192.168.4.0`: rede dos PCs do segundo piso
+  + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
++ CLI (após configurações): `copy running-config startup-config`
 
 **`Router-PT`**: `PC Network Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
@@ -507,12 +517,18 @@ Realizado por:
   + IPv4 Address: `192.168.4.1`
   + Subnet Mask: `255.255.255.192`
   + CLI: `ip helper-address 192.168.1.108`
++ `Fast Ethernet 7/0`: ligação ao `Ground Floor Switch`
+  + IPv4 Address: `192.168.5.1`
+  + Subnet Mask: `255.255.255.192`
+  + CLI: `ip helper-address 192.168.1.108`
 + `Routing RIP`
   + `192.168.1.0`: rede dos servidores
   + `192.168.2.0`: rede dos dispositivos IoT
   + `192.168.3.0`: rede dos PCs do primeiro piso
   + `192.168.4.0`: rede dos PCs do segundo piso
+  + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
++ CLI (após configurações): `copy running-config startup-config`
 
 ##### Configuração dos *Switches*
 
@@ -534,6 +550,10 @@ Realizado por:
 
 **`2960-24TT`**: `IoT Switch`
 + `Gigabit Ethernet 0/1`: ligação ao `IoT Router`
+
+**`2960-24TT`**: `Ground Floor Switch`
++ `Gigabit Ethernet 0/1`: ligação ao `PC Network Router`
++ `Gigabit Ethernet 0/2`: ligação ao `Guest Access Point`
 
 ##### Configuração dos Servidores
 
@@ -580,6 +600,15 @@ Realizado por:
     + Start IP Address: `192.168.4.2`
     + Subnet Mask: `255.255.255.192`
     + Maximum Number of Users: 30
+    + TFTP Server: `192.168.1.101`
+    + WLC Address: `0.0.0.0`
+  + Rede de PCs do piso térreo
+    + Pool Name: `resdochao`
+    + Default Gateway: `192.168.5.1`
+    + DNS Server: `192.168.1.99`
+    + Start IP Address: `192.168.5.2`
+    + Subnet Mask: `255.255.255.192`
+    + Maximum Number os Users: 30
     + TFTP Server: `192.168.1.101`
     + WLC Address: `0.0.0.0`
 
@@ -633,6 +662,16 @@ Realizado por:
   + Default Gateway: `192.168.1.107`
   + DNS Server: `192.168.1.99`
 
+##### Configuração do *Access Point*
+
+**`AccessPoint-PT`**: `Guest Access Point` - *access point* para dispositivos convidados
++ `Port 1`: ligação por *wireless*
+  + SSID: `convidados`
+  + 2.4GHz Channel: 6
+  + Coverage Range: 100
+  + Authentication: `WPA2-PSK`
+    + PSK Pass Phrase: `guests@xpto`
+
 ##### Configuração do Computador do Administrador de Sistemas
 
 **`PC-PT`**: `NascenteAdmin` - computador do administrador de sistemas do edifício XPTOtec_Nascente
@@ -650,8 +689,24 @@ Realizado por:
 
 **`2960-24TT`**: `First Floor Switch`
 + `Gigabit Ethernet 0/1`: ligação ao `PC Network Router`
++ `Fast Ethernet 0/1`: ligação ao `PC0`
++ `Fast Ethernet 0/2`: ligação ao `PC1`
 
-##### Configuração do Computador-exemplo
+##### Configuração dos Computadores-exemplo
+
+**`PC-PT`**: `PC0`
++ `Fast Ethernet 0`: ligação ao `First Floor Switch`
+  + Default Gateway: `DHCP: primeiropiso`
+  + DNS Server: `DHCP: primeiropiso`
+  + IPv4 Address: `DHCP: primeiropiso`
+  + Subnet Mask: `DHCP: primeiropiso`
+
+**`PC-PT`**: `PC1`
++ `Fast Ethernet 0`: ligação ao `First Floor Switch`
+  + Default Gateway: `DHCP: primeiropiso`
+  + DNS Server: `DHCP: primeiropiso`
+  + IPv4 Address: `DHCP: primeiropiso`
+  + Subnet Mask: `DHCP: primeiropiso`
 
 #### Piso 2
 
@@ -659,8 +714,24 @@ Realizado por:
 
 **`2960-24TT`**: `Second Floor Switch`
 + `Gigabit Ethernet 0/1`: ligação ao `PC Network Router`
++ `Fast Ethernet 0/1`: ligação ao `PC2`
++ `Fast Ethernet 0/2`: ligação ao `PC3`
 
 ##### Configuração do Computador-exemplo
+
+**`PC-PT`**: `PC2`
++ `Fast Ethernet 0`: ligação *wireless* ao `Guest Access Point`
+  + Default Gateway: `DHCP: segundopiso`
+  + DNS Server: `DHCP: segundopiso`
+  + IPv4 Address: `DHCP: segundopiso`
+  + Subnet Mask: `DHCP: segundopiso`
+
+**`PC-PT`**: `PC3`
++ `Fast Ethernet 0`: ligação ao `Second Floor Switch`
+  + Default Gateway: `DHCP: segundopiso`
+  + DNS Server: `DHCP: segundopiso`
+  + IPv4 Address: `DHCP: segundopiso`
+  + Subnet Mask: `DHCP: segundopiso`
 
 
 
@@ -678,11 +749,11 @@ Realizado por:
 
 **`AccessPoint-PT`**: `Guest Access Point` - *access point* para dispositivos convidados
 + `Port 1`: ligação por *wireless*
-  + SSID: `convidados@leste`
+  + SSID: `convidados`
   + 2.4GHz Channel: 6
   + Coverage Range: 100
   + Authentication: `WPA2-PSK`
-    + PSK Pass Phrase: `guests@leste`
+    + PSK Pass Phrase: `guests@xpto`
 
 #### Piso 1
 
@@ -702,6 +773,7 @@ Realizado por:
   + `192.168.4.0`: rede dos PCs do segundo piso
   + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
++ CLI (após configurações): `copy running-config startup-config`
 
 **`Router-PT`**: `Server Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
@@ -719,6 +791,7 @@ Realizado por:
   + `192.168.4.0`: rede dos PCs do segundo piso
   + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
++ CLI (após configurações): `copy running-config startup-config`
 
 **`Router-PT`**: `IoT Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
@@ -736,6 +809,7 @@ Realizado por:
   + `192.168.4.0`: rede dos PCs do segundo piso
   + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
++ CLI (após configurações): `copy running-config startup-config`
 
 **`Router-PT`**: `PC Network Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
@@ -761,6 +835,7 @@ Realizado por:
   + `192.168.4.0`: rede dos PCs do segundo piso
   + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
++ CLI (após configurações): `copy running-config startup-config`
 
 ##### Configuração dos *Switches*
 
