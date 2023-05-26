@@ -33,7 +33,11 @@ URL: https://www.cables-solutions.com/difference-between-straight-through-and-cr
 
 ### DNS (*Domain Name Service*)
 
+URL: https://www.cloudflare.com/learning/dns/dns-records/dns-soa-record/
+
 O endereço `8.8.8.8` é o DNS da Google. É utilizado por conveniência quando o dispositivo não consegue encontrar o DNS através do DHCP (*Dynamic Host Configuration Protocol*). Numa situação real, não é recomendado utilizar o endereço `8.8.8.8`.
+
+O registo SOA (*Start of Authority*) armazena informação importante sobre um domínio ou zona (conjunto de domínios ou subdomínios), como o endereço de e-mail do administrador, a última atualização do domínio e o tempo de espera entre atualizações do servidor. Todas as zonas DNS requerem um registo SOA para se conformarem aos padrões IETF.
 
 ## Endereçamento IPv4
 
