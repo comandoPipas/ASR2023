@@ -44,6 +44,6 @@ A rede `192.168.1.0` pertence à gama de endereços privados de classe C. Se a m
 
 A rede `192.168.2.0` pertence à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.255.0`, ou seja, com 24 bits de rede, possui um máximo de 254 *hosts*. Escolheu-se esta rede, com esta submáscara, para os endereços dinâmicos dos dispositivos de IoT.
 
-As redes `192.168.3.0` e `192.168.4.0` pertencem à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.192`, ou seja, com 26 bits de rede, possuem um máximo de 62 *hosts* cada. Escolheram-se estas redes, com estas submáscaras, para os endereços dinâmicos dos computadores pessoais dos colaboradores da empresa em cada piso.
+As redes `192.168.3.0`, `192.168.4.0` e `192.168.5.0` pertencem à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.192`, ou seja, com 26 bits de rede, possuem um máximo de 62 *hosts* cada. Escolheram-se estas redes, com estas submáscaras, para os endereços dinâmicos dos computadores pessoais dos colaboradores da empresa em cada piso.
 
 A rede `192.168.10.0` pertence à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.255.248`, ou seja, com 29 bits de rede, possui um máximo de 6 *hosts*. Escolheu-se esta rede, com esta submáscara, para os endereços estáticos da rede interna aos *routers*.
