@@ -50,7 +50,7 @@ As redes `192.168.2.0`, `192.168.6.0` e `192.168.13.0` pertencem à gama de ende
 
 As redes `192.168.3.0`, `192.168.4.0`, `192.168.5.0`, `192.168.7.0`, `192.168.8.0`, `192.168.9.0`, `192.168.14.0`, `192.168.15.0`, `192.168.16.0` pertencem à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.192`, ou seja, com 26 bits de rede, possuem um máximo de 62 *hosts* cada. Escolheram-se estas redes, com estas submáscaras, para os endereços dinâmicos dos computadores pessoais dos colaboradores da empresa em cada piso. O DHCP está configurado para atribuir dinamicamente 30 *hosts*, pelo que permite a inserção de mais 32 dispositivos para cada subrede.
 
-As redes `192.168.10.0`, `192.168.11.0` e `192.168.12.0` pertencem à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.255.248`, ou seja, com 29 bits de rede, possuem um máximo de 6 *hosts*. Escolheram-se estas rede, com esta submáscara, para os endereços estáticos da rede interna aos *routers*.
+As redes `192.168.10.0`, `192.168.11.0`, `192.168.12.0` e `192.168.20.0` pertencem à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.255.248`, ou seja, com 29 bits de rede, possuem um máximo de 6 *hosts*. Escolheram-se estas redes, com esta submáscara, para os endereços estáticos da rede interna aos *routers*.
 
 ## Listas de Controlo de Acesso (ACLs)
 

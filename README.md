@@ -96,7 +96,21 @@ Realizado por:
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
 + `Fast Ethernet 1/0`: ligação ao `Nascente` (*multiuser*)
+  + IPv4 Address: `192.168.20.1`
+  + Subnet Mask: `255.255.255.248`
+  + CLI:
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Fast Ethernet 1/1`: ligação ao `Leste` (*multiuser*)
+  + IPv4 Address: `192.168.21.1`
+  + Subnet Mask: `255.255.255.248`
+  + CLI:
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Routing RIP`
   + `1.0.0.0`: rede de ligação à Internet
   + `2.0.0.0`: rede do servidor `minhaubi.org`
@@ -257,12 +271,12 @@ Realizado por:
 + `Fast Ethernet 0/3`: ligação ao `Email`
 + `Fast Ethernet 0/4`: ligação ao `TFTP`
 + `Fast Ethernet 0/5`: ligação ao `HTTP`
-+ `Fast Ethernet 0/6`: ligação ao `IoT Register`
 + `Fast Ethernet 0/7`: ligação ao `OrienteAdmin`
 
 **`2960-24TT`**: `IoT Switch`
 + `Gigabit Ethernet 0/1`: ligação ao `IoT Router`
 + `Fast Ethernet 0/1`: ligação a `Access Point IoT`
++ `Fast Ethernet 0/24`: ligação ao `IoT Register`
 
 **`2960-24TT`**: `Ground Floor Switch`
 + `Fast Ethernet 0/1`: ligação ao `PC Network Router`
@@ -295,7 +309,7 @@ Realizado por:
     + Pool Name: `iotoriente`
     + Default Gateway: `192.168.2.1`
     + DNS Server: `192.168.1.99`
-    + Start IP Address: `192.168.2.2`
+    + Start IP Address: `192.168.2.3`
     + Subnet Mask: `255.255.255.0`
     + Maximum Number of Users: 254
     + TFTP Server: `192.168.1.101`
@@ -408,10 +422,10 @@ Realizado por:
 ###### Servidor de Registo IoT
 
 **`Server-PT`**: `IoT Register` - servidor de Registo IoT (*Internet of Things*)
-+ `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.103`
++ `Fast Ethernet 0`: ligação ao `IoT Switch`
+  + IPv4 Address: `192.168.2.2`
   + Subnet Mask: `255.255.255.224`
-  + Default Gateway: `192.168.1.97`
+  + Default Gateway: `192.168.2.1`
   + DNS Server: `192.168.1.99`
 
 ###### *Network Controller*
@@ -546,10 +560,6 @@ Realizado por:
   + DNS Server: `DHCP: primeiropiso`
   + IPv4 Address: `DHCP: primeiropiso`
   + Subnet Mask: `DHCP: primeiropiso`
-
-##### Configuração da IoT
-
-###### *Appliances* (Cafeteira)
 
 #### Piso 2
 
@@ -764,11 +774,11 @@ Realizado por:
 + `Fast Ethernet 0/2`: ligação ao `Email`
 + `Fast Ethernet 0/3`: ligação ao `FTP`
 + `Fast Ethernet 0/4`: ligação ao `HTTP`
-+ `Fast Ethernet 0/5`: ligação ao `Registo IoT`
 + `Fast Ethernet 0/6`: ligação ao `NascenteAdmin`
 
 **`2960-24TT`**: `IoT Switch`
 + `Gigabit Ethernet 0/1`: ligação ao `IoT Router`
++ `Fast Ethernet 0/24`: ligação ao `Registo IoT`
 
 **`2960-24TT`**: `Ground Floor Switch`
 + `Gigabit Ethernet 0/1`: ligação ao `PC Network Router`
@@ -798,7 +808,7 @@ Realizado por:
     + Pool Name: `iotnascente`
     + Default Gateway: `192.168.6.1`
     + DNS Server: `192.168.1.99`
-    + Start IP Address: `192.168.6.2`
+    + Start IP Address: `192.168.6.3`
     + Subnet Mask: `255.255.255.0`
     + Maximum Number of Users: 254
     + TFTP Server: `192.168.1.101`
@@ -866,10 +876,10 @@ Realizado por:
 ###### Servidor de Registo IoT
 
 **`Server-PT`** - servidor de Registo IoT (*Internet of Things*)
-+ `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.112`
++ `Fast Ethernet 0`: ligação ao `IoT Switch`
+  + IPv4 Address: `192.168.6.3`
   + Subnet Mask: `255.255.255.224`
-  + Default Gateway: `192.168.1.107`
+  + Default Gateway: `192.168.6.1`
   + DNS Server: `192.168.1.99`
 
 ###### *Network Controller*
@@ -1019,7 +1029,7 @@ Realizado por:
     + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
-+ `Fast Ethernet 1/0`: ligação ao `Server Switch`
++ `Fast Ethernet 0/1`: ligação ao `Server Switch`
   + IPv4 Address: `192.168.1.117`
   + Subnet Mask: `255.255.255.224`
   + CLI:
@@ -1148,11 +1158,11 @@ Realizado por:
 + `Fast Ethernet 0/2`: ligação ao `Email`
 + `Fast Ethernet 0/3`: ligação ao `FTP`
 + `Fast Ethernet 0/4`: ligação ao `HTTP`
-+ `Fast Ethernet 0/5`: ligação ao `Registo IoT`
 + `Fast Ethernet 0/6`: ligação ao `LesteAdmin`
 
 **`2960-24TT`**: `IoT Switch`
 + `Gigabit Ethernet 0/1`: ligação ao `IoT Router`
++ `Fast Ethernet 0/24`: ligação ao `Registo IoT`
 
 **`2960-24TT`**: `First Floor Switch`
 + `Gigabit Ethernet 0/1`: ligação ao `PC Network Router`
@@ -1183,7 +1193,7 @@ Realizado por:
     + Pool Name: `iotleste`
     + Default Gateway: `192.168.13.1`
     + DNS Server: `192.168.1.99`
-    + Start IP Address: `192.168.13.2`
+    + Start IP Address: `192.168.13.3`
     + Subnet Mask: `255.255.255.0`
     + Maximum Number of Users: 254
     + TFTP Server: `192.168.1.101`
@@ -1251,8 +1261,8 @@ Realizado por:
 ###### Servidor de Registo IoT
 
 **`Server-PT`**: `Registo IoT` - servidor de Registo IoT (*Internet of Things*)
-+ `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.122`
++ `Fast Ethernet 0`: ligação ao `IoT Switch`
+  + IPv4 Address: `192.168.13.2`
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.117`
   + DNS Server: `192.168.1.99`
