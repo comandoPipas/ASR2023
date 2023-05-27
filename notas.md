@@ -46,8 +46,16 @@ URL: https://www.calculator.net/ip-subnet-calculator.html?cclass=c&csubnet=27&ci
 
 A rede `192.168.1.0` pertence à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.255.224`, ou seja, com 27 bits de rede, possui um máximo de 30 *hosts*. Escolheu-se esta rede, com esta submáscara, para os endereços estáticos dos servidores, do computador do administrador de sistemas e do *network controller*. A rede do edifício XPTOtec_Oriente permite a inserção de mais um dispositivo; as redes dos edifícios XPTOtec_Nascente e XPTOtec_Leste permitem a inserção de mais dois dispositivos.
 
-A rede `192.168.2.0` pertence à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.255.0`, ou seja, com 24 bits de rede, possui um máximo de 254 *hosts*. Escolheu-se esta rede, com esta submáscara, para os endereços dinâmicos dos dispositivos de IoT.
+As redes `192.168.2.0`, `192.168.6.0` e `192.168.13.0` pertencem à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.255.0`, ou seja, com 24 bits de rede, possuem um máximo de 254 *hosts*. Escolheram-se estas redes, com esta submáscara, para os endereços dinâmicos dos dispositivos de IoT.
 
-As redes `192.168.3.0`, `192.168.4.0` e `192.168.5.0` pertencem à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.192`, ou seja, com 26 bits de rede, possuem um máximo de 62 *hosts* cada. Escolheram-se estas redes, com estas submáscaras, para os endereços dinâmicos dos computadores pessoais dos colaboradores da empresa em cada piso.
+As redes `192.168.3.0`, `192.168.4.0`, `192.168.5.0`, `192.168.7.0`, `192.168.8.0`, `192.168.9.0`, `192.168.14.0`, `192.168.15.0`, `192.168.16.0` pertencem à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.192`, ou seja, com 26 bits de rede, possuem um máximo de 62 *hosts* cada. Escolheram-se estas redes, com estas submáscaras, para os endereços dinâmicos dos computadores pessoais dos colaboradores da empresa em cada piso. O DHCP está configurado para atribuir dinamicamente 30 *hosts*, pelo que permite a inserção de mais 32 dispositivos para cada subrede.
 
-A rede `192.168.10.0` pertence à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.255.248`, ou seja, com 29 bits de rede, possui um máximo de 6 *hosts*. Escolheu-se esta rede, com esta submáscara, para os endereços estáticos da rede interna aos *routers*.
+As redes `192.168.10.0`, `192.168.11.0` e `192.168.12.0` pertencem à gama de endereços privados de classe C. Se a máscara de subrede é `255.255.255.248`, ou seja, com 29 bits de rede, possuem um máximo de 6 *hosts*. Escolheram-se estas rede, com esta submáscara, para os endereços estáticos da rede interna aos *routers*.
+
+## Listas de Controlo de Acesso (ACLs)
+
+Utilizadas para filtrar tráfego de rede em *routers* Cisco, controlam se os pacotes devem ser encaminhados ou bloqueados na entrada ou saída da interface.
+
+Em ACLs padrão o tráfego é filtrado com base no endereço IP de origem dos pacotes IP. Devem ser implementadas perto do destino de modo a evitar bloquear tráfego legítimo da fonte.
+
+Em ACLs estendidas o tráfego é filtrado com base numa combinação de critérios múltiplos: endereço IP de origem, endereço IP de destino, porta TCP ou UDP, protocolo, entre outros. Devem ser colocadas perto da origem devido a permitirem controlo mais granular dos recursos acedidos sem haver desperdício de largura de banda pelo tráfego de pacotes que serão potencialmente bloqueados.

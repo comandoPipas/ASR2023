@@ -15,6 +15,60 @@ Realizado por:
 
 ## Configurações dos Equipamentos
 
+### Exterior (Internet)
+
+#### Configuração do *Router*
+
+**`2811 IOS15`**: `THE INTERNET`
++ `Fast Ethernet 0/0`: ligação ao `Main Router`
+  + IPv4 Address: `1.1.1.2`
+  + Subnet Mask: `255.0.0.0`
+  + CLI:
+    + `ipv6 enable`
+    + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
+    + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
++ `Fast Ethernet 0/1`: ligação ao `minhaubi.org`
+  + IPv4 Address: `2.2.2.1`
+  + Subnet Mask: `255.0.0.0`
+  + CLI:
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
++ `Fast Ethernet 1/0`: ligação ao `google`
+  + IPv4 Address: `3.3.3.1`
+  + Subnet Mask: `255.0.0.0`
+  + CLI:
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
++ `Routing RIP`
+  + `1.0.0.0`: rede de ligação à Internet
+  + `2.0.0.0`: rede do servidor `minhaubi.org`
+  + `3.0.0.0`: rede do servidor da Internet (Google)
++ CLI
+  + `ipv6 unicast-routing`
+
+#### Configuração dos Servidores
+
+**`Server-PT`**: `minhaubi.org`
++ `Fast Ethernet 0`: ligação ao `THE INTERNET`
+  + IPv4 Address: `2.2.2.2`
+  + Subnet Mask: `255.0.0.0`
+  + Default Gateway: `2.2.2.1`
+  + DNS Server: `3.3.3.2`
+
+**`Server-PT`**: `google`
++ `Fast Ethernet 0`: ligação ao `THE INTERNET`
+  + IPv4 Address: `3.3.3.2`
+  + Subnet Mask: `255.0.0.0`
+  + Default Gateway: `3.3.3.1`
+  + DNS Server: `3.3.3.2`
+
 ### Edifício 1 - XPTOtec_Oriente
 
 #### Piso 0
@@ -25,27 +79,63 @@ Realizado por:
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
   + IPv4 Address: `192.168.10.25`
   + Subnet Mask: `255.255.255.248`
-  + CLI: `ip helper-address 192.168.1.98`
-+ `Gigabit Ethernet 6/0`: ligação ao `Nascente` (*multiuser*)
-+ `Gigabit Ethernet 7/0`: ligação ao `Leste` (*multiuser*)
+  + CLI:
+    + `ip helper-address 192.168.1.98`
+    + `ipv6 enable`
+    + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
+    + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
++ `Fast Ethernet 0/1`: ligação ao `THE INTERNET`
+  + IPv4 Address: `1.1.1.1`
+  + Subnet Mask: `255.0.0.0`
+  + CLI:
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
++ `Fast Ethernet 1/0`: ligação ao `Nascente` (*multiuser*)
++ `Fast Ethernet 1/1`: ligação ao `Leste` (*multiuser*)
 + `Routing RIP`
+  + `1.0.0.0`: rede de ligação à Internet
+  + `2.0.0.0`: rede do servidor `minhaubi.org`
+  + `3.0.0.0`: rede do servidor da Internet (Google)
   + `192.168.1.0`: rede dos servidores
   + `192.168.2.0`: rede dos dispositivos IoT
   + `192.168.3.0`: rede dos PCs do primeiro piso
   + `192.168.4.0`: rede dos PCs do segundo piso
   + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
-+ CLI (após configurações): `copy running-config tftp` > `192.168.1.101`
++ CLI
+  + `ipv6 unicast-routing`
+  + `enable password admin`
+  + `line vty 0 15`
+    + `password admin`
+    + `login`
+  + (após configurações): `copy running-config tftp` > `192.168.1.101`
 
 **`2811 IOS15`**: `Server Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
   + IPv4 Address: `192.168.10.26`
   + Subnet Mask: `255.255.255.248`
-  + CLI: `ip helper-address 192.168.1.98`
-+ `Fast Ethernet 1/0`: ligação ao `Server Switch`
+  + CLI:
+    + `ip helper-address 192.168.1.98`
+    + `ipv6 enable`
+    + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
+    + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
++ `Fast Ethernet 0/1`: ligação ao `Server Switch`
   + IPv4 Address: `192.168.1.97`
   + Subnet Mask: `255.255.255.224`
-  + CLI: `ip helper-address 192.168.1.98`
+  + CLI:
+    + `ip helper-address 192.168.1.98`
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Routing RIP`
   + `192.168.1.0`: rede dos servidores
   + `192.168.2.0`: rede dos dispositivos IoT
@@ -53,17 +143,35 @@ Realizado por:
   + `192.168.4.0`: rede dos PCs do segundo piso
   + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
-+ CLI (após configurações): `copy running-config tftp` > `192.168.1.101`
++ CLI
+  + `ipv6 unicast-routing`
+  + `enable password admin`
+  + `line vty 0 15`
+    + `password admin`
+    + `login`
+  + (após configurações): `copy running-config tftp` > `192.168.1.101`
 
 **`2811 IOS15`**: `IoT Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
   + IPv4 Address: `192.168.10.27`
   + Subnet Mask: `255.255.255.248`
-  + CLI: `ip helper-address 192.168.1.98`
+  + CLI:
+    + `ip helper-address 192.168.1.98`
+    + `ipv6 enable`
+    + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
+    + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Fast Ethernet 0/1`: ligação ao `IoT Switch`
   + IPv4 Address: `192.168.2.1`
   + Subnet Mask: `255.255.255.0`
-  + CLI: `ip helper-address 192.168.1.98`
+  + CLI:
+    + `ip helper-address 192.168.1.98`
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Routing RIP`
   + `192.168.1.0`: rede dos servidores
   + `192.168.2.0`: rede dos dispositivos IoT
@@ -71,25 +179,53 @@ Realizado por:
   + `192.168.4.0`: rede dos PCs do segundo piso
   + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
-+ CLI (após configurações): `copy running-config tftp` > `192.168.1.101`
++ CLI
+  + `ipv6 unicast-routing`
+  + `enable password admin`
+  + `line vty 0 15`
+    + `password admin`
+    + `login`
+  + (após configurações): `copy running-config tftp` > `192.168.1.101`
 
 **`2811 IOS15`**: `PC Network Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
   + IPv4 Address: `192.168.10.28`
   + Subnet Mask: `255.255.255.248`
-  + CLI: `ip helper-address 192.168.1.98`
-+ `Fast Ethernet 1/0`: ligação ao `First Floor Switch`
+  + CLI:
+    + `ip helper-address 192.168.1.98`
+    + `ipv6 enable`
+    + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
+    + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
++ `Fast Ethernet 0/1`: ligação ao `First Floor Switch`
   + IPv4 Address: `192.168.3.1`
   + Subnet Mask: `255.255.255.192`
-  + CLI: `ip helper-address 192.168.1.98`
-+ `Fast Ethernet 6/0`: ligação ao `Second Floor Switch`
+  + CLI:
+    + `ip helper-address 192.168.1.98`
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
++ `Fast Ethernet 1/0`: ligação ao `Second Floor Switch`
   + IPv4 Address: `192.168.4.1`
   + Subnet Mask: `255.255.255.192`
-  + CLI: `ip helper-address 192.168.1.98`
-+ `Fast Ethernet 7/0`: ligação ao `Groundfloor Switch`
+  + CLI:
+    + `ip helper-address 192.168.1.98`
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
++ `Fast Ethernet 1/1`: ligação ao `Groundfloor Switch`
   + IPv4 Address: `192.168.5.1`
   + Subnet Mask: `255.255.255.192`
-  + CLI: `ip helper-address 192.168.1.98`
+  + CLI:
+    + `ip helper-address 192.168.1.98`
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Routing RIP`
   + `192.168.1.0`: rede dos servidores
   + `192.168.2.0`: rede dos dispositivos IoT
@@ -97,7 +233,13 @@ Realizado por:
   + `192.168.4.0`: rede dos PCs do segundo piso
   + `192.168.5.0`: rede dos PCs do piso térreo
   + `192.168.10.0`: rede entre os *routers*
-+ CLI (após configurações): `copy running-config tftp` > `192.168.1.101`
++ CLI
+  + `ipv6 unicast-routing`
+  + `enable password admin`
+  + `line vty 0 15`
+    + `password admin`
+    + `login`
+  + (após configurações): `copy running-config tftp` > `192.168.1.101`
 
 ##### Configuração dos *Switches*
 
@@ -475,6 +617,10 @@ Realizado por:
   + `192.168.11.0`: rede entre os *routers*
 + CLI
   + `ipv6 unicast-routing`
+  + `enable password admin`
+  + `line vty 0 15`
+    + `password admin`
+    + `login`
   + (após configurações): `copy running-config tftp` > `192.168.1.101`
 
 **`2811 IOS15`**: `Server Router`
@@ -507,6 +653,10 @@ Realizado por:
   + `192.168.11.0`: rede entre os *routers*
 + CLI
   + `ipv6 unicast-routing`
+  + `enable password admin`
+  + `line vty 0 15`
+    + `password admin`
+    + `login`
   + (após configurações): `copy running-config tftp` > `192.168.1.101`
 
 **`2811 IOS15`**: `IoT Router`
@@ -539,6 +689,10 @@ Realizado por:
   + `192.168.11.0`: rede entre os *routers*
 + CLI
   + `ipv6 unicast-routing`
+  + `enable password admin`
+  + `line vty 0 15`
+    + `password admin`
+    + `login`
   + (após configurações): `copy running-config tftp` > `192.168.1.101`
 
 **`2811 IOS15`**: `PC Network Router`
@@ -826,81 +980,158 @@ Realizado por:
 
 **`2811 IOS15`**: `Main Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `192.168.10.25`
+  + IPv4 Address: `192.168.12.25`
   + Subnet Mask: `255.255.255.248`
-  + CLI: `ip helper-address 192.168.1.118`
+  + CLI:
+    + `ip helper-address 192.168.1.118`
+    + `ipv6 enable`
+    + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
+    + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Gigabit Ethernet 6/0`: ligação ao `Nascente` (*multiuser*)
 + `Gigabit Ethernet 7/0`: ligação ao `Oriente` (*multiuser*)
 + `Routing RIP`
   + `192.168.1.0`: rede dos servidores
-  + `192.168.2.0`: rede dos dispositivos IoT
-  + `192.168.3.0`: rede dos PCs do primeiro piso
-  + `192.168.4.0`: rede dos PCs do segundo piso
-  + `192.168.5.0`: rede dos PCs do piso térreo
-  + `192.168.10.0`: rede entre os *routers*
-+ CLI (após configurações): `copy running-config tftp` > `192.168.1.101`
+  + `192.168.13.0`: rede dos dispositivos IoT
+  + `192.168.14.0`: rede dos PCs do primeiro piso
+  + `192.168.15.0`: rede dos PCs do segundo piso
+  + `192.168.16.0`: rede dos PCs do piso térreo
+  + `192.168.12.0`: rede entre os *routers*
++ CLI
+  + `ipv6 unicast-routing`
+  + `enable password admin`
+  + `line vty 0 15`
+    + `password admin`
+    + `login`
+  + (após configurações): `copy running-config tftp` > `192.168.1.101`
 
 **`2811 IOS15`**: `Server Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `192.168.10.26`
+  + IPv4 Address: `192.168.12.26`
   + Subnet Mask: `255.255.255.248`
-  + CLI: `ip helper-address 192.168.1.118`
+  + CLI:
+    + `ip helper-address 192.168.1.118`
+    + `ipv6 enable`
+    + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
+    + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Fast Ethernet 1/0`: ligação ao `Server Switch`
   + IPv4 Address: `192.168.1.117`
   + Subnet Mask: `255.255.255.224`
-  + CLI: `ip helper-address 192.168.1.118`
+  + CLI:
+    + `ip helper-address 192.168.1.118`
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Routing RIP`
   + `192.168.1.0`: rede dos servidores
-  + `192.168.2.0`: rede dos dispositivos IoT
-  + `192.168.3.0`: rede dos PCs do primeiro piso
-  + `192.168.4.0`: rede dos PCs do segundo piso
-  + `192.168.5.0`: rede dos PCs do piso térreo
-  + `192.168.10.0`: rede entre os *routers*
-+ CLI (após configurações): `copy running-config tftp` > `192.168.1.101`
+  + `192.168.13.0`: rede dos dispositivos IoT
+  + `192.168.14.0`: rede dos PCs do primeiro piso
+  + `192.168.15.0`: rede dos PCs do segundo piso
+  + `192.168.16.0`: rede dos PCs do piso térreo
+  + `192.168.12.0`: rede entre os *routers*
++ CLI
+  + `ipv6 unicast-routing`
+  + `enable password admin`
+  + `line vty 0 15`
+    + `password admin`
+    + `login`
+  + (após configurações): `copy running-config tftp` > `192.168.1.101`
 
 **`2811 IOS15`**: `IoT Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `192.168.10.27`
+  + IPv4 Address: `192.168.12.27`
   + Subnet Mask: `255.255.255.248`
-  + CLI: `ip helper-address 192.168.1.118`
+  + CLI:
+    + `ip helper-address 192.168.1.118`
+    + `ipv6 enable`
+    + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
+    + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Fast Ethernet 0/1`: ligação ao `IoT Switch`
-  + IPv4 Address: `192.168.2.1`
+  + IPv4 Address: `192.168.13.1`
   + Subnet Mask: `255.255.255.0`
-  + CLI: `ip helper-address 192.168.1.118`
+  + CLI:
+    + `ip helper-address 192.168.1.118`
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Routing RIP`
   + `192.168.1.0`: rede dos servidores
-  + `192.168.2.0`: rede dos dispositivos IoT
-  + `192.168.3.0`: rede dos PCs do primeiro piso
-  + `192.168.4.0`: rede dos PCs do segundo piso
-  + `192.168.5.0`: rede dos PCs do piso térreo
-  + `192.168.10.0`: rede entre os *routers*
-+ CLI (após configurações): `copy running-config tftp` > `192.168.1.101`
+  + `192.168.13.0`: rede dos dispositivos IoT
+  + `192.168.14.0`: rede dos PCs do primeiro piso
+  + `192.168.15.0`: rede dos PCs do segundo piso
+  + `192.168.16.0`: rede dos PCs do piso térreo
+  + `192.168.12.0`: rede entre os *routers*
++ CLI
+  + `ipv6 unicast-routing`
+  + `enable password admin`
+  + `line vty 0 15`
+    + `password admin`
+    + `login`
+  + (após configurações): `copy running-config tftp` > `192.168.1.101`
 
 **`2811 IOS15`**: `PC Network Router`
 + `Fast Ethernet 0/0`: ligação ao `Main Switch`
-  + IPv4 Address: `192.168.10.28`
+  + IPv4 Address: `192.168.12.28`
   + Subnet Mask: `255.255.255.248`
-  + CLI: `ip helper-address 192.168.1.118`
+  + CLI:
+    + `ip helper-address 192.168.1.118`
+    + `ipv6 enable`
+    + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
+    + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Fast Ethernet 1/0`: ligação ao `First Floor Switch`
-  + IPv4 Address: `192.168.3.1`
+  + IPv4 Address: `192.168.14.1`
   + Subnet Mask: `255.255.255.192`
-  + CLI: `ip helper-address 192.168.1.118`
+  + CLI:
+    + `ip helper-address 192.168.1.118`
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Fast Ethernet 6/0`: ligação ao `Second Floor Switch`
-  + IPv4 Address: `192.168.4.1`
+  + IPv4 Address: `192.168.15.1`
   + Subnet Mask: `255.255.255.192`
-  + CLI: `ip helper-address 192.168.1.118`
+  + CLI:
+    + `ip helper-address 192.168.1.118`
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Fast Ethernet 7/0`: ligação ao `Ground Floor Switch`
-  + IPv4 Address: `192.168.5.1`
+  + IPv4 Address: `192.168.16.1`
   + Subnet Mask: `255.255.255.192`
-  + CLI: `ip helper-address 192.168.1.118`
+  + CLI:
+    + `ip helper-address 192.168.1.118`
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Routing RIP`
   + `192.168.1.0`: rede dos servidores
-  + `192.168.2.0`: rede dos dispositivos IoT
-  + `192.168.3.0`: rede dos PCs do primeiro piso
-  + `192.168.4.0`: rede dos PCs do segundo piso
-  + `192.168.5.0`: rede dos PCs do piso térreo
-  + `192.168.10.0`: rede entre os *routers*
-+ CLI (após configurações): `copy running-config tftp` > `192.168.1.101`
+  + `192.168.13.0`: rede dos dispositivos IoT
+  + `192.168.14.0`: rede dos PCs do primeiro piso
+  + `192.168.15.0`: rede dos PCs do segundo piso
+  + `192.168.16.0`: rede dos PCs do piso térreo
+  + `192.168.12.0`: rede entre os *routers*
++ CLI
+  + `ipv6 unicast-routing`
+  + `enable password admin`
+  + `line vty 0 15`
+    + `password admin`
+    + `login`
+  + (após configurações): `copy running-config tftp` > `192.168.1.101`
 
 ##### Configuração dos *Switches*
 
@@ -950,36 +1181,36 @@ Realizado por:
     + WLC Address: `0.0.0.0`
   + Rede dos dispositivos IoT
     + Pool Name: `iotleste`
-    + Default Gateway: `192.168.2.1`
+    + Default Gateway: `192.168.13.1`
     + DNS Server: `192.168.1.99`
-    + Start IP Address: `192.168.2.2`
+    + Start IP Address: `192.168.13.2`
     + Subnet Mask: `255.255.255.0`
     + Maximum Number of Users: 254
     + TFTP Server: `192.168.1.101`
     + WLC Address: `0.0.0.0`
   + Rede de PCs do piso 1
     + Pool Name: `primeiropiso`
-    + Default Gateway: `192.168.3.1`
+    + Default Gateway: `192.168.14.1`
     + DNS Server: `192.168.1.99`
-    + Start IP Address: `192.168.3.2`
+    + Start IP Address: `192.168.14.2`
     + Subnet Mask: `255.255.255.192`
     + Maximum Number of Users: 30
     + TFTP Server: `192.168.1.101`
     + WLC Address: `0.0.0.0`
   + Rede de PCs do piso 2
     + Pool Name: `segundopiso`
-    + Default Gateway: `192.168.4.1`
+    + Default Gateway: `192.168.15.1`
     + DNS Server: `192.168.1.99`
-    + Start IP Address: `192.168.4.2`
+    + Start IP Address: `192.168.15.2`
     + Subnet Mask: `255.255.255.192`
     + Maximum Number of Users: 30
     + TFTP Server: `192.168.1.101`
     + WLC Address: `0.0.0.0`
   + Rede de PCs do piso térreo
     + Pool Name: `resdochao`
-    + Default Gateway: `192.168.5.1`
+    + Default Gateway: `192.168.16.1`
     + DNS Server: `192.168.1.99`
-    + Start IP Address: `192.168.5.2`
+    + Start IP Address: `192.168.16.2`
     + Subnet Mask: `255.255.255.192`
     + Maximum Number of Users: 30
     + TFTP Server: `192.168.1.101`
