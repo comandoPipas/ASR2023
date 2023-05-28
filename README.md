@@ -1363,4 +1363,29 @@ Realizado por:
 
 ## Configurações de Segurança
 
-ACLs.
+### Configurações Específicas
+
++ Main Router (Oriente): `ip access-list extended 100`
+  + `deny ip any 2.2.2.2 0.0.0.255` - negar acesso ao `minhaubi.org`
+
+### Configurações Gerais
++ `ip access-list extended 100`
+  + Recusar ligação por TELNET aos *routers* a todos os utilizadores, exceto os três computadores do administrador de sistemas:
+    + `deny tcp any any eq telnet`
+    + `permit tcp 192.168.1.105 224.255.255.255 any eq telnet`
+    + `permit tcp 192.168.200.114 224.255.255.255 any eq telnet`
+    + `permit tcp 192.168.100.124 224.255.255.255 any eq telnet`
+  + Permitir ligação às redes de IoT apenas aos computadores do administrador de sistemas (e ao protocolo DHCP):
+    + `deny ip any 192.168.2.1 0.255.255.255`
+    + `permit udp any any eq 67`, `permit udp any any eq 68` (67 e 68 são as portas UDP para o protocolo DHCP)
+    + `permit ip 192.168.1.105 224.255.255.255 any`
+    + `permit ip 192.168.200.114 224.255.255.255 any`
+    + `permit ip 192.168.100.124 224.255.255.255 any`
+  + Bloquear TFTP e FTP a partir da Internet:
+    + `deny tcp any any eq ftp`
+    + `deny udp any any eq tftp`
+  + Permitir apenas acesso ICMP e HTTP à Internet (e DNS):
+    + `deny ip any any`
+    + `permit tcp 192.168.1.99 224.255.255.255 any eq 53`
+    + `permit tcp any any eq 80`
+    + `permit icmp any any`
