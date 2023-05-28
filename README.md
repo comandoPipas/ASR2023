@@ -609,7 +609,7 @@ Realizado por:
   + IPv4 Address: `192.168.11.25`
   + Subnet Mask: `255.255.255.248`
   + CLI:
-    + `ip helper-address 192.168.1.108`
+    + `ip helper-address 192.168.200.108`
     + `ipv6 enable`
     + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
     + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
@@ -617,7 +617,23 @@ Realizado por:
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
 + `Fast Ethernet 0/1`: ligação ao `Oriente` (*multiuser*)
+  + IPv4 Address: `192.168.20.2`
+  + Subnet Mask: `255.255.255.248`
+  + CLI:
+    + `ip helper-address 192.168.200.108`
+    + `ipv6 enable
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Fast Ethernet 1/0`: ligação ao `Leste` (*multiuser*)
+  + IPv4 Address: `192.168.22.1`
+  + Subnet Mask: `255.255.255.248`
+  + CLI:
+    + `ip helper-address 192.168.200.108`
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Routing RIP`
   + `192.168.1.0`: rede dos servidores
   + `192.168.6.0`: rede dos dispositivos IoT
@@ -638,7 +654,7 @@ Realizado por:
   + IPv4 Address: `192.168.11.26`
   + Subnet Mask: `255.255.255.248`
   + CLI:
-    + `ip helper-address 192.168.1.108`
+    + `ip helper-address 192.168.200.108`
     + `ipv6 enable`
     + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
     + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
@@ -646,10 +662,10 @@ Realizado por:
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
 + `Fast Ethernet 0/1`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.107`
+  + IPv4 Address: `192.168.200.107`
   + Subnet Mask: `255.255.255.224`
   + CLI:
-    + `ip helper-address 192.168.1.108`
+    + `ip helper-address 192.168.200.108`
     + `ipv6 enable`
     + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
     + `ipv6 address autoconfig`
@@ -674,7 +690,7 @@ Realizado por:
   + IPv4 Address: `192.168.11.27`
   + Subnet Mask: `255.255.255.248`
   + CLI:
-    + `ip helper-address 192.168.1.108`
+    + `ip helper-address 192.168.200.108`
     + `ipv6 enable`
     + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
     + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
@@ -685,7 +701,7 @@ Realizado por:
   + IPv4 Address: `192.168.6.1`
   + Subnet Mask: `255.255.255.0`
   + CLI:
-    + `ip helper-address 192.168.1.108`
+    + `ip helper-address 192.168.200.108`
     + `ipv6 enable`
     + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
     + `ipv6 address autoconfig`
@@ -710,7 +726,7 @@ Realizado por:
   + IPv4 Address: `192.168.11.28`
   + Subnet Mask: `255.255.255.248`
   + CLI:
-    + `ip helper-address 192.168.1.108`
+    + `ip helper-address 192.168.200.108`
     + `ipv6 enable`
     + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
     + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
@@ -721,7 +737,7 @@ Realizado por:
   + IPv4 Address: `192.168.7.1`
   + Subnet Mask: `255.255.255.192`
   + CLI:
-    + `ip helper-address 192.168.1.108`
+    + `ip helper-address 192.168.200.108`
     + `ipv6 enable`
     + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
     + `ipv6 address autoconfig`
@@ -730,7 +746,7 @@ Realizado por:
   + IPv4 Address: `192.168.8.1`
   + Subnet Mask: `255.255.255.192`
   + CLI:
-    + `ip helper-address 192.168.1.108`
+    + `ip helper-address 192.168.200.108`
     + `ipv6 enable`
     + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
     + `ipv6 address autoconfig`
@@ -739,7 +755,7 @@ Realizado por:
   + IPv4 Address: `192.168.9.1`
   + Subnet Mask: `255.255.255.192`
   + CLI:
-    + `ip helper-address 192.168.1.108`
+    + `ip helper-address 192.168.200.108`
     + `ipv6 enable`
     + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
     + `ipv6 address autoconfig`
@@ -790,9 +806,9 @@ Realizado por:
 
 **`Server-PT`**: `DHCP` - servidor de DHCP (*Dynamic Host Configuration Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.108`
+  + IPv4 Address: `192.168.200.108`
   + Subnet Mask: `255.255.255.224`
-  + Default Gateway: `192.168.1.107`
+  + Default Gateway: `192.168.200.107`
   + DNS Server: `192.168.1.99`
 + Serviços DHCP
   + Rede base
@@ -845,9 +861,9 @@ Realizado por:
 
 **`Server-PT`**: `Email` - servidor de e-mail
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.109`
+  + IPv4 Address: `192.168.200.109`
   + Subnet Mask: `255.255.255.224`
-  + Default Gateway: `192.168.1.107`
+  + Default Gateway: `192.168.200.107`
   + DNS Server: `192.168.1.99`
 + Serviços Email
   + Domain Name: `nascente.xpto.tec`
@@ -859,18 +875,18 @@ Realizado por:
 
 **`Server-PT`**: `FTP` - servidor de FTP (*File Transfer Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.110`
+  + IPv4 Address: `192.168.200.110`
   + Subnet Mask: `255.255.255.224`
-  + Default Gateway: `192.168.1.107`
+  + Default Gateway: `192.168.200.107`
   + DNS Server: `192.168.1.99`
 
 ###### Servidor HTTP
 
 **`Server-PT`**: `HTTP` - servidor de HTTP (*HyperText Transfer Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.111`
+  + IPv4 Address: `192.168.200.111`
   + Subnet Mask: `255.255.255.224`
-  + Default Gateway: `192.168.1.107`
+  + Default Gateway: `192.168.200.107`
   + DNS Server: `192.168.1.99`
 
 ###### Servidor de Registo IoT
@@ -886,9 +902,9 @@ Realizado por:
 
 **`NetworkController`**: `NascenteController` - controlador de rede
 + `Gigabit Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.113`
+  + IPv4 Address: `192.168.200.113`
   + Subnet Mask: `255.255.255.224`
-  + Default Gateway: `192.168.1.107`
+  + Default Gateway: `192.168.200.107`
   + DNS Server: `192.168.1.99`
 
 ##### Configuração do *Access Point*
@@ -905,9 +921,9 @@ Realizado por:
 
 **`PC-PT`**: `NascenteAdmin` - computador do administrador de sistemas do edifício XPTOtec_Nascente
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.114`
+  + IPv4 Address: `192.168.200.114`
   + Subnet Mask: `255.255.255.224`
-  + Default Gateway: `192.168.1.107`
+  + Default Gateway: `192.168.200.107`
   + DNS Server: `192.168.1.99`
 
 ##### Configuração do Computador-exemplo
@@ -993,15 +1009,29 @@ Realizado por:
   + IPv4 Address: `192.168.12.25`
   + Subnet Mask: `255.255.255.248`
   + CLI:
-    + `ip helper-address 192.168.1.118`
+    + `ip helper-address 192.168.100.118`
     + `ipv6 enable`
     + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
     + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
     + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
-+ `Gigabit Ethernet 6/0`: ligação ao `Nascente` (*multiuser*)
-+ `Gigabit Ethernet 7/0`: ligação ao `Oriente` (*multiuser*)
++ `Fast Ethernet 0/1`: ligação ao `Oriente` (*multiuser*)
+  + IPv4 Address: `192.168.21.2`
+  + Subnet Mask: `255.255.255.248`
+  + CLI:
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
++ `Fast Ethernet 1/0`: ligação ao `Nascente` (*multiuser*)
+  + IPv4 Address: `192.168.22.2`
+  + Subnet Mask: `255.255.255.248`
+  + CLI:
+    + `ipv6 enable`
+    + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
+    + `ipv6 address autoconfig`
+    + `ipv6 address dhcp`
 + `Routing RIP`
   + `192.168.1.0`: rede dos servidores
   + `192.168.13.0`: rede dos dispositivos IoT
@@ -1009,6 +1039,9 @@ Realizado por:
   + `192.168.15.0`: rede dos PCs do segundo piso
   + `192.168.16.0`: rede dos PCs do piso térreo
   + `192.168.12.0`: rede entre os *routers*
+  + `192.168.20.0`: rede entre
+  + `192.168.21.0`: rede entre
+  + `192.168.22.0`: 
 + CLI
   + `ipv6 unicast-routing`
   + `enable password admin`
@@ -1022,7 +1055,7 @@ Realizado por:
   + IPv4 Address: `192.168.12.26`
   + Subnet Mask: `255.255.255.248`
   + CLI:
-    + `ip helper-address 192.168.1.118`
+    + `ip helper-address 192.168.100.118`
     + `ipv6 enable`
     + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
     + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
@@ -1030,16 +1063,16 @@ Realizado por:
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
 + `Fast Ethernet 0/1`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.117`
+  + IPv4 Address: `192.168.100.117`
   + Subnet Mask: `255.255.255.224`
   + CLI:
-    + `ip helper-address 192.168.1.118`
+    + `ip helper-address 192.168.100.118`
     + `ipv6 enable`
     + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
 + `Routing RIP`
-  + `192.168.1.0`: rede dos servidores
+  + `192.168.100.0`: rede dos servidores
   + `192.168.13.0`: rede dos dispositivos IoT
   + `192.168.14.0`: rede dos PCs do primeiro piso
   + `192.168.15.0`: rede dos PCs do segundo piso
@@ -1058,7 +1091,7 @@ Realizado por:
   + IPv4 Address: `192.168.12.27`
   + Subnet Mask: `255.255.255.248`
   + CLI:
-    + `ip helper-address 192.168.1.118`
+    + `ip helper-address 192.168.100.118`
     + `ipv6 enable`
     + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
     + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
@@ -1069,7 +1102,7 @@ Realizado por:
   + IPv4 Address: `192.168.13.1`
   + Subnet Mask: `255.255.255.0`
   + CLI:
-    + `ip helper-address 192.168.1.118`
+    + `ip helper-address 192.168.100.118`
     + `ipv6 enable`
     + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
     + `ipv6 address autoconfig`
@@ -1094,36 +1127,36 @@ Realizado por:
   + IPv4 Address: `192.168.12.28`
   + Subnet Mask: `255.255.255.248`
   + CLI:
-    + `ip helper-address 192.168.1.118`
+    + `ip helper-address 192.168.100.118`
     + `ipv6 enable`
     + `ipv6 address 2001:AAAA:BBBB:CCCC::/64 eui-64` (*eui-64 global unicast address*)
     + `ipv6 address 2001:AAAA:BBBB:CCCC:1234:1234:1234:1234/64` (*manual global unicast address*)
     + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
-+ `Fast Ethernet 1/0`: ligação ao `First Floor Switch`
++ `Fast Ethernet 0/1`: ligação ao `First Floor Switch`
   + IPv4 Address: `192.168.14.1`
   + Subnet Mask: `255.255.255.192`
   + CLI:
-    + `ip helper-address 192.168.1.118`
+    + `ip helper-address 192.168.100.118`
     + `ipv6 enable`
     + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
-+ `Fast Ethernet 6/0`: ligação ao `Second Floor Switch`
++ `Fast Ethernet 1/0`: ligação ao `Second Floor Switch`
   + IPv4 Address: `192.168.15.1`
   + Subnet Mask: `255.255.255.192`
   + CLI:
-    + `ip helper-address 192.168.1.118`
+    + `ip helper-address 192.168.100.118`
     + `ipv6 enable`
     + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
-+ `Fast Ethernet 7/0`: ligação ao `Ground Floor Switch`
++ `Fast Ethernet 1/1`: ligação ao `Ground Floor Switch`
   + IPv4 Address: `192.168.16.1`
   + Subnet Mask: `255.255.255.192`
   + CLI:
-    + `ip helper-address 192.168.1.118`
+    + `ip helper-address 192.168.100.118`
     + `ipv6 enable`
     + `ipv6 address FE80::AAAA:BBBB:CCCC:DDDD link-local` (*link local address*)
     + `ipv6 address autoconfig`
@@ -1175,9 +1208,9 @@ Realizado por:
 
 **`Server-PT`**: `DHCP` - servidor de DHCP (*Dynamic Host Configuration Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.118`
+  + IPv4 Address: `192.168.100.118`
   + Subnet Mask: `255.255.255.224`
-  + Default Gateway: `192.168.1.117`
+  + Default Gateway: `192.168.100.117`
   + DNS Server: `192.168.1.99`
 + Serviços DHCP
   + Rede base
