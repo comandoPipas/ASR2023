@@ -635,7 +635,7 @@ Realizado por:
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
 + `Routing RIP`
-  + `192.168.1.0`: rede dos servidores
+  + `192.168.200.0`: rede dos servidores
   + `192.168.6.0`: rede dos dispositivos IoT
   + `192.168.7.0`: rede dos PCs do primeiro piso
   + `192.168.8.0`: rede dos PCs do segundo piso
@@ -671,7 +671,7 @@ Realizado por:
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
 + `Routing RIP`
-  + `192.168.1.0`: rede dos servidores
+  + `192.168.200.0`: rede dos servidores
   + `192.168.6.0`: rede dos dispositivos IoT
   + `192.168.7.0`: rede dos PCs do primeiro piso
   + `192.168.8.0`: rede dos PCs do segundo piso
@@ -707,7 +707,7 @@ Realizado por:
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
 + `Routing RIP`
-  + `192.168.1.0`: rede dos servidores
+  + `192.168.200.0`: rede dos servidores
   + `192.168.6.0`: rede dos dispositivos IoT
   + `192.168.7.0`: rede dos PCs do primeiro piso
   + `192.168.8.0`: rede dos PCs do segundo piso
@@ -761,7 +761,7 @@ Realizado por:
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
 + `Routing RIP`
-  + `192.168.1.0`: rede dos servidores
+  + `192.168.200.0`: rede dos servidores
   + `192.168.6.0`: rede dos dispositivos IoT
   + `192.168.7.0`: rede dos PCs do primeiro piso
   + `192.168.8.0`: rede dos PCs do segundo piso
@@ -1033,7 +1033,7 @@ Realizado por:
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
 + `Routing RIP`
-  + `192.168.1.0`: rede dos servidores
+  + `192.168.100.0`: rede dos servidores
   + `192.168.13.0`: rede dos dispositivos IoT
   + `192.168.14.0`: rede dos PCs do primeiro piso
   + `192.168.15.0`: rede dos PCs do segundo piso
@@ -1108,7 +1108,7 @@ Realizado por:
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
 + `Routing RIP`
-  + `192.168.1.0`: rede dos servidores
+  + `192.168.100.0`: rede dos servidores
   + `192.168.13.0`: rede dos dispositivos IoT
   + `192.168.14.0`: rede dos PCs do primeiro piso
   + `192.168.15.0`: rede dos PCs do segundo piso
@@ -1162,7 +1162,7 @@ Realizado por:
     + `ipv6 address autoconfig`
     + `ipv6 address dhcp`
 + `Routing RIP`
-  + `192.168.1.0`: rede dos servidores
+  + `192.168.100.0`: rede dos servidores
   + `192.168.13.0`: rede dos dispositivos IoT
   + `192.168.14.0`: rede dos PCs do primeiro piso
   + `192.168.15.0`: rede dos PCs do segundo piso
@@ -1263,9 +1263,9 @@ Realizado por:
 
 **`Server-PT`**: `Email` - servidor de e-mail
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.119`
+  + IPv4 Address: `192.168.100.119`
   + Subnet Mask: `255.255.255.224`
-  + Default Gateway: `192.168.1.117`
+  + Default Gateway: `192.168.100.117`
   + DNS Server: `192.168.1.99`
 + Serviços Email
   + Domain Name: `leste.xpto.tec`
@@ -1277,18 +1277,18 @@ Realizado por:
 
 **`Server-PT`**: `FTP` - servidor de FTP (*File Transfer Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.120`
+  + IPv4 Address: `192.168.100.120`
   + Subnet Mask: `255.255.255.224`
-  + Default Gateway: `192.168.1.117`
+  + Default Gateway: `192.168.100.117`
   + DNS Server: `192.168.1.99`
 
 ###### Servidor HTTP
 
 **`Server-PT`**: `HTTP` - servidor de HTTP (*HyperText Transfer Protocol*)
 + `Fast Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.121`
+  + IPv4 Address: `192.168.100.121`
   + Subnet Mask: `255.255.255.224`
-  + Default Gateway: `192.168.1.117`
+  + Default Gateway: `192.168.100.117`
   + DNS Server: `192.168.1.99`
 
 ###### Servidor de Registo IoT
@@ -1297,25 +1297,25 @@ Realizado por:
 + `Fast Ethernet 0`: ligação ao `IoT Switch`
   + IPv4 Address: `192.168.13.2`
   + Subnet Mask: `255.255.255.224`
-  + Default Gateway: `192.168.1.117`
+  + Default Gateway: `192.168.13.1`
   + DNS Server: `192.168.1.99`
 
 ###### *Network Controller*
 
 **`NetworkController`**: `LesteController` - controlador de rede
 + `Gigabit Ethernet 0`: ligação ao `Server Switch`
-  + IPv4 Address: `192.168.1.123`
+  + IPv4 Address: `192.168.100.123`
   + Subnet Mask: `255.255.255.224`
-  + Default Gateway: `192.168.1.117`
+  + Default Gateway: `192.168.100.117`
   + DNS Server: `192.168.1.99`
 
 ##### Configuração do Computador do Administrador de Sistemas
 
 **`PC-PT`**: `LesteAdmin` - computador do administrador de sistemas do edifício XPTOtec_Leste
 + `Fast Ethernet 0`: ligação ao `Main Switch`
-  + IPv4 Address: `192.168.1.124`
+  + IPv4 Address: `192.168.100.124`
   + Subnet Mask: `255.255.255.224`
-  + Default Gateway: `192.168.1.117`
+  + Default Gateway: `192.168.100.117`
   + DNS Server: `192.168.1.99`
 
 ##### Configuração dos Computadores-exemplo
