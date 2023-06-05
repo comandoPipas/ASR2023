@@ -4,7 +4,7 @@
 
 Projeto da unidade curricular de Administração de Sistemas em Rede:
 + Ficheiros de simulação do Cisco Packet Tracer das redes de cada edifício;
-+ PDF com a vista sumária dos três edifícios e pisos e das redes utilizadas em cada um (TO-DO);
++ PDF com a vista sumária dos três edifícios e pisos e das redes utilizadas em cada um;
 + Plantas dos edifícios.
 
 Realizado por:
@@ -275,7 +275,14 @@ Realizado por:
 
 **`2960-24TT`**: `IoT Switch`
 + `Gigabit Ethernet 0/1`: ligação ao `IoT Router`
-+ `Fast Ethernet 0/1`: ligação a `Access Point IoT`
++ `Fast Ethernet 0/1`: ligação ao `First Floor IoT`
++ `Fast Ethernet 0/2`: ligação ao `Ground Floor IoT`
++ `Fast Ethernet 0/3`: ligação ao `Second Floor IoT`
++ `Fast Ethernet 0/4`: ligação ao `Water Shooter`
++ `Fast Ethernet 0/5`: ligação ao `Fire Detector`
++ `Fast Ethernet 0/6`: ligação ao `Card Reader`
++ `Fast Ethernet 0/7`: ligação ao `Blower`
++ `Fast Ethernet 0/8`: ligação ao `Laser`
 + `Fast Ethernet 0/24`: ligação ao `IoT Register`
 
 **`2960-24TT`**: `Ground Floor Switch`
@@ -359,22 +366,46 @@ Realizado por:
     + Name: `ns1.xpto.tec`
     + Type: `NS`
     + Detail: `ns1.xpto.tec`
-  + Email
-    + Name: `mail.xpto.tec`
-    + Type: `A Record`
-    + Detail: `192.168.1.100`
   + DNS (endereço IP)
     + Name: `ns1.xpto.tec`
     + Type: `A Record`
     + Detail: `192.168.1.99`
-  + HTTP
+  + Email (Oriente)
+    + Name: `mail.xpto.tec`
+    + Type: `A Record`
+    + Detail: `192.168.1.100`
+  + Email (Nascente)
+    + Name: `nascente.xpto.tec`
+    + Type: `A Record`
+    + Detail: `192.168.200.109`
+  + Email (Leste)
+    + Name: `leste.xpto.tec`
+    + Type: `A Record`
+    + Detail: `192.168.100.119`
+  + HTTP (Oriente)
     + Name: `home.xpto.tec`
     + Type: `A Record`
     + Detail: `192.168.1.102`
+  + HTTP (Nascente)
+    + Name: `home-nascente.xpto.tec`
+    + Type: `A Record`
+    + Detail: `192.168.200.111`
+  + HTTP (Leste)
+    + Name: `home-leste.xpto.tec`
+    + Type: `A Record`
+    + Detail: `192.168.100.121`
   + IoT
     + Name: `iot.xpto.tec`
     + Type: `A Record`
     + Detail: `192.168.1.103`
+  + "Google"
+    + Name: `ns1.org`
+    + Type: `A Record`
+    + Detail: `3.3.3.2`
+  + "Google" (domínio `org`)
+    + Name: `org`
+    + Type: `NS`
+    + Detail: `ns1.org`
   + SOA (*Start of Authority*)
     + Name: `xpto.tec`
     + Type: `SOA`
@@ -424,9 +455,63 @@ Realizado por:
 **`Server-PT`**: `IoT Register` - servidor de Registo IoT (*Internet of Things*)
 + `Fast Ethernet 0`: ligação ao `IoT Switch`
   + IPv4 Address: `192.168.2.2`
-  + Subnet Mask: `255.255.255.224`
+  + Subnet Mask: `255.255.255.0`
   + Default Gateway: `192.168.2.1`
   + DNS Server: `192.168.1.99`
++ `Desktop` > `iot.xpto.tec`
+  + Login:
+    + Username: `admin`
+    + Password: `admin`
+  + Add Rule:
+    + Name: `Fire Detected`
+    + Condition: `Fire Detector` > `Fire Detected` > `true`
+    + Then:
+      + `Ground Floor Siren` >  `On` > `true`
+      + `First Floor Siren` > `On` > `true`
+      + `Second Floor Siren` > `On` > `true`
+      + `Water Shooter` > `Status` > `true`
+  + Add Rule:
+    + Name: `Fire Over`
+    + Condition: `Fire Detector` > `Fire Detected` > `false`
+    + Then:
+      + `Ground Floor Siren` >  `On` > `false`
+      + `First Floor Siren` > `On` > `false`
+      + `Second Floor Siren` > `On` > `false`
+      + `Water Shooter` > `Status` > `false`
+  + Add Rule:
+    + Name: `Titanic`
+    + Condition: `Water Level Jigamabob` > `Level` > `>` > `7`
+    + Then: `Water Hole` > `Status` > `true`
+  + Add Rule:
+    + Name: `Sahara`
+    + Condition: `Water Level Jigamabob` > `Level` > `=` > `0`
+    + Then: `Water Hole` > `Status` > `false`
+  + Add Rule:
+    + Name: `Canary Stopped Singing`
+    + Condition: `Smoke Detector` > `Level` > `>` > `50`
+    + Then: `Smoke Window` > `On` > `true`
+  + Add Rule: 
+    + Name: `Canary Crispy`
+    + Condition: `Smoke Detector` > `Level` > `>` > `65`
+    + Then: `Blower` > `Status` > `High`
+  + Add Rule:
+    + Name: `Canary Sings Again`
+    + Condition: `Smoke Detector` > `Level` > `<` > `30`
+    + Then:
+      + `Smoke Window` > `On` > `false`
+      + `Blower` > `Status` > `Off`
+  + Add Rule:
+    + Name: `You Shall Pass`
+    + Condition: `Card Reader` > `Card ID` > `=` > `1001`
+    + Then: `Server Door` > `Lock` > `Unlock`
+  + Add Rule:
+    + Name: `You Shall Not Pass`
+    + Condition: `Card Reader` > `Card ID` > `!=` > `1001`
+    + Then: `Ground Floor Siren` > `On` > `true`
+  + Add Rule:
+    + Name: `Close Door`
+    + Condition: `Door` > `Lock` > `Unlock`
+    + Then: `Door` > `Lock` > `Lock`
 
 ###### *Network Controller*
 
@@ -445,32 +530,10 @@ Realizado por:
   + Subnet Mask: `255.255.255.224`
   + Default Gateway: `192.168.1.97`
   + DNS Server: `192.168.1.99`
-+ Desktop > Web Browser > `adminmachine`
-  + Login:
-    + Username: `admin`
-    + Password: `admin`
-  + Menu > Provisioning > Credentials
-    + \+ Credential
-      + Username: `admin`
-      + Password: `admin`
-      + Enable Password: `admin`
-      + Description: `admin`
-  + Menu > Provisioning > Network Device
-    + \+ Device
-      + IP Address: `192.168.1.97`
-      + CLI Credential: `admin - admin`
-    + \+ Device
-      + IP Address: `192.168.2.1`
-      + CLI Credential: `admin - admin`
-    + \+ Device
-      + IP Address: `192.168.4.1`
-      + CLI Credential: `admin - admin`
-  + Menu > Assurance > Hosts
-    + ??
 
 ##### Configuração da IoT
 
-**`AccessPoint-PT`**: `IoT Access Point` - *access point* para dispositivos de IoT
+**`AccessPoint-PT`**: `Ground Floor IoT` - *access point* para dispositivos de IoT no rés do chão
 + `Port 1`: ligação por *wireless*
   + SSID: `IoT Network`
   + 2.4GHz Channel: 1
@@ -478,17 +541,126 @@ Realizado por:
   + Authentication: `WPA2-PSK`
     + PSK Pass Phrase: `password`
 
-###### Ar Condicionado
+**`Door`**: `Server Door`
++ `Wireless0`: ligação ao `Ground Floor IoT`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
 
-###### Detetor de Incêndio
+**`Water Level Monitor`**: `Water Level Jigamabob`
++ `Wireless0`: ligação ao `Ground Floor IoT`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
 
-###### Dispersores de Água
+**`Window`**: `Smoke Window`
++ `Wireless0`: ligação ao `Ground Floor IoT`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
 
-###### Ralos de Extração de Água
+**`Carbon Dioxide Detector`**: `Smoke Detector`
++ `Wireless0`: ligação ao `Ground Floor IoT`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
 
-###### Detetores de CO2
+**`Siren`**: `Ground Floor Siren`
++ `Wireless0`: ligação ao `Ground Floor IoT`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
 
-###### RFID (*Radio Frequency Identification*)
+**`Water Drain`**: `Water Hole`
++ `Wireless0`: ligação ao `Ground Floor IoT`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
+
+**`Blower`**: `Blower`
++ `Wireless0`: ligação ao `IoT Switch`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
+
+**`Fire Sprinkler`**: `Water Shooter`
++ `Fast Ethernet 0`: ligação ao `IoT Switch`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
+
+**`Fire Monitor`**: `Fire Detector`
++ `Fast Ethernet 0`: ligação ao `IoT Switch`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
+
+**`Trip Sensor`**: `Laser`
++ `Wireless0`: ligação ao `IoT Switch`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
+
+**`RFID Reader`**: `Card Reader`
++ `Fast Ethernet 0`: ligação ao `IoT Switch`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
 
 ##### Configuração dos Computadores-exemplo
 
@@ -561,6 +733,38 @@ Realizado por:
   + IPv4 Address: `DHCP: primeiropiso`
   + Subnet Mask: `DHCP: primeiropiso`
 
+##### Configuração de IoT
+
+**`AccessPoint-PT`**: `First Floor IoT` - *access point* para dispositivos de IoT no primeiro piso
++ `Port 1`: ligação por *wireless*
+  + SSID: `IoT Network`
+  + 2.4GHz Channel: 1
+  + Coverage Range: 50
+  + Authentication: `WPA2-PSK`
+    + PSK Pass Phrase: `password`
+
+**`Siren`**: `First Floor Siren`
++ `Wireless0`: ligação ao `First Floor IoT`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
+
+**`Appliance`**: `Coffee Maker`
++ `Wireless0`: ligação ao `First Floor IoT`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
+
 #### Piso 2
 
 ##### Configuração do *Switch*
@@ -579,6 +783,60 @@ Realizado por:
   + Coverage Range: 100
   + Authentication: `WPA2-PSK`
     + PSK Pass Phrase: `guests@xpto`
+
+##### Configuração da IoT
+
+**`AccessPoint-PT`**: `Second Floor IoT` - *access point* para dispositivos de IoT no segundo piso
++ `Port 1`: ligação por *wireless*
+  + SSID: `IoT Network`
+  + 2.4GHz Channel: 1
+  + Coverage Range: 50
+  + Authentication: `WPA2-PSK`
+    + PSK Pass Phrase: `password`
+
+**`Temperature Monitor`**: `Thermometer`
++ `Wireless0`: ligação ao `Second Floor IoT`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
+
+**`Siren`**: `Second Floor Siren`
++ `Wireless0`: ligação ao `Second Floor IoT`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
+
+**`Air Conditioner`**: `A/C`
++ `Wireless0`: ligação ao `Ground Floor IoT`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
+
+**`Furnace`**: `Heater`
++ `Wireless0`: ligação ao `Ground Floor IoT`
+  + Default Gateway: `DHCP: iotoriente`
+  + DNS Server: `DHCP: iotoriente`
+  + IPv4 Address: `DHCP: iotoriente`
+  + Subnet Mask: `DHCP: resdochao`
+  + IoT Server: Remote Server
+    + Server Address: `192.168.2.2`
+    + Username: `admin`
+    + Password: `admin`
 
 ##### Configuração dos Computadores-exemplo
 
@@ -1363,29 +1621,54 @@ Realizado por:
 
 ## Configurações de Segurança
 
-### Configurações Específicas
-
-+ Main Router (Oriente): `ip access-list extended 100`
-  + `deny ip any 2.2.2.2 0.0.0.255` - negar acesso ao `minhaubi.org`
-
 ### Configurações Gerais
-+ `ip access-list extended 100`
+
++ Definir a lista de controlo de acesso: `ip access-list extended <numero>`
   + Recusar ligação por TELNET aos *routers* a todos os utilizadores, exceto os três computadores do administrador de sistemas:
-    + `deny tcp any any eq telnet`
     + `permit tcp 192.168.1.105 224.255.255.255 any eq telnet`
     + `permit tcp 192.168.200.114 224.255.255.255 any eq telnet`
     + `permit tcp 192.168.100.124 224.255.255.255 any eq telnet`
-  + Permitir ligação às redes de IoT apenas aos computadores do administrador de sistemas (e ao protocolo DHCP):
-    + `deny ip any 192.168.2.1 0.255.255.255`
-    + `permit udp any any eq 67`, `permit udp any any eq 68` (67 e 68 são as portas UDP para o protocolo DHCP)
-    + `permit ip 192.168.1.105 224.255.255.255 any`
-    + `permit ip 192.168.200.114 224.255.255.255 any`
-    + `permit ip 192.168.100.124 224.255.255.255 any`
-  + Bloquear TFTP e FTP a partir da Internet:
+    + `deny tcp any <ip-interface-externa> 0.0.0.0 eq telnet`
++ Adicionar a lista de controlo de acesso (a uma interface): `ip access-group <numero> in`
+
+### Configurações Específicas
+
++ Main Router:
+  + Negar acesso ao `minhaubi.org` (XPTOtec_Oriente):
+    + `deny ip any 2.2.2.2 0.0.0.255`
+  + Bloquear TFTP e FTP a partir da Internet (XPTOtec_Oriente):
     + `deny tcp any any eq ftp`
     + `deny udp any any eq tftp`
-  + Permitir apenas acesso ICMP e HTTP à Internet (e DNS):
-    + `deny ip any any`
-    + `permit tcp 192.168.1.99 224.255.255.255 any eq 53`
-    + `permit tcp any any eq 80`
+  + Permitir apenas acesso ICMP e HTTP à Internet (XPTOtec_Oriente):
+    + `permit tcp any any eq 80`(80 é a porta TCP para o protocolo HTTP)
     + `permit icmp any any`
+  + Permitir tráfego entre redes:
+    + `permit ip any any`
++ PC Network Router:
+  + Permitir tráfego entre redes:
+    + `permit ip any any`
++ Server Router:
+  + Permitir apenas ligação à Internet ou ao email da empresa:
+    + `permit tcp any <ip-servidor-http> 0.0.0.0 eq www`
+    + `deny tcp any <ip-servidor-http> 0.0.0.0`
+    + `permit tcp any <ip-servidor-email> 0.0.0.0 eq smtp`
+    + `deny tcp any <ip-servidor-email> 0.0.0.0`
+  + Permitir ligação aos protocolos EIGRP, OSPF, RIP, BGP, DNS:
+    + `permit eigrp any any`
+    + `permit ospf any any`
+    + `permit udp any any eq 520` (520 é a porta UDP para o protocolo RIP)
+    + `permit tcp any any eq 179` (179 é a porta TCP para o protocolo BGP)
+    + `permit udp any any eq domain`
+  + Permitir ligação à rede de servidores do edifício XPTOtec_Oriente para TFTP:
+    + `permit udp 192.168.1.101 0.0.0.0 <ip-interface-externa> 0.0.0.0`
++ IoT Router:
+  + Permitir ligação aos protocolos DHCP, EIGRP, OSPF, RIP, BGP, NSS:
+    + `permit udp any any eq 67` (67 e 68 são as portas UDP para o protocolo DHCP)
+    + `permit udp any any eq 68` (no `show access-lists` aparecem como `bootps` e `bootpc`)
+    + `permit eigrp any any`
+    + `permit ospf any any`
+    + `permit udp any any eq 520` (520 é a porta UDP para o protocolo RIP)
+    + `permit tcp any any eq 179` (179 é a porta TCP para o protocolo BGP)
+    + `permit tcp any any eq 170` (170 é a porta TCP para o protocolo NSS)
+  + Permitir ligação à rede de servidores do edifício XPTOtec_Oriente para TFTP:
+    + `permit udp 192.168.1.101 0.0.0.0 <ip-interface-externa> 0.0.0.0`
